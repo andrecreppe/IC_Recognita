@@ -1,4 +1,7 @@
 # IC_Recognita
 
-Platform: Unity
-Target: Android
+Project made as a "proof of concept" to the original Matlab reseach, done at 
+'andrecreppe/IC_Biometria' repository.
+
+- Platform: Unity
+- Target: Android/iOS

@@ -11,7 +11,7 @@ public class CameraController : MonoBehaviour
 
     private string langKey;
     private int count;
-    private bool camAvailable;
+    private bool camAvailable, isBackCamera;
     private WebCamTexture backCamera, frontCamera, activeCamera;
     private Texture defaultBackground;
 
@@ -24,12 +24,13 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
+        //Setup Configs
         langKey = "lang";
         count = 0;
 
         IsFirstTime();
 
-        //Setup
+        //Setup Enviroment
         defaultBackground = background.texture;
 
         WebCamDevice[] devices = WebCamTexture.devices;
@@ -66,10 +67,15 @@ public class CameraController : MonoBehaviour
         //Activation priority => frontcamera
         //Check if have backcamera
         if(frontCamera != null)
+        {
             activeCamera = frontCamera;
+            isBackCamera = false; //Called in the 'Save' script
+        }
         else
+        {
             activeCamera = backCamera;
-
+            isBackCamera = true;
+        }
 
         //Set up the camera
         TestCamera();
@@ -81,6 +87,7 @@ public class CameraController : MonoBehaviour
         if(!camAvailable)
             return;
 
+        //Adjust camera for screen
         float ratio = (float)activeCamera.width / (float)activeCamera.height;
         fit.aspectRatio = ratio;
 
@@ -94,7 +101,7 @@ public class CameraController : MonoBehaviour
         background.rectTransform.localEulerAngles = new Vector3(0, 0, orient);
     }
 
-    private void TestCamera()
+    private void TestCamera() //Test if camera is working (start error or not)
     {
         if(activeCamera == null)
         {
@@ -175,17 +182,6 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    private void SaveToDevice(Texture2D snap)
-    {
-        File.WriteAllBytes(
-            Application.dataPath //Location
-            + "/capture" + ++count + ".png", //Image Name
-            snap.EncodeToPNG() //File type
-        );
-
-        Debug.Log("Image saved at: " + Application.dataPath);
-    }
-
     //---------------- PUBLIC METHODS --------------------
 
     public bool GetCamAvailable()
@@ -199,32 +195,55 @@ public class CameraController : MonoBehaviour
         if (activeCamera == frontCamera) 
         {
             activeCamera = backCamera;
+            isBackCamera = true;
             TestCamera();
         }
         //Backcamera -> Frontcamera
         else
         {
             activeCamera = frontCamera;
+            isBackCamera = false;
             TestCamera();
         }
     }
 
-    public Texture2D GetCamImage()
+    public Texture2D GetCamImage() //Save the current image frame
     {
         activeCamera.Pause();
 
+        //Invert if is backcamera
         Texture2D snap = new Texture2D(activeCamera.width, activeCamera.height);
         snap.SetPixels(activeCamera.GetPixels());
         snap.Apply();
 
-        activeCamera.Play();
+        //TEST IF THIS IS CORRECT!!!!
 
-        //SaveToDevice(snap);
+        if(isBackCamera) //Image Upside down (backCamera)
+        {
+            //Inverted because the image is inverted
+            int yN = snap.width;
+            int xN = snap.height;
+
+            Texture2D fliped = new Texture2D(snap.width, snap.height);
+
+            for (int i = 0; i < xN; i++)
+            {
+                for (int j = 0; j < yN; j++)
+                {
+                    fliped.SetPixel(j, xN - i - 1, snap.GetPixel(j, i));
+                }
+            }
+            fliped.Apply();
+
+            snap = fliped;
+        }
+
+        activeCamera.Play();
 
         return snap;
     }
 
-    public void ChangeCameraStatus()
+    public void ChangeCameraStatus() //Invert camera status (pause or running)
     {
         if(camAvailable)
         {

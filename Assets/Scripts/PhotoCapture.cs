@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System.IO;
 
 public class PhotoCapture : MonoBehaviour
 {
@@ -12,6 +11,7 @@ public class PhotoCapture : MonoBehaviour
     private bool pic1_show, pic2_show;
     private Texture2D pic1, pic2;
     private CameraController camcon;
+    private ImageProcessing imgprocess;
 
     public GameObject but1, but2;
     public Button snapButton, returnButton, trashButton;
@@ -22,28 +22,32 @@ public class PhotoCapture : MonoBehaviour
 
     private void Start()
     {
+        //Setup Enviroment
         but1.SetActive(false); pic1_show = false;
         but2.SetActive(false); pic2_show = false;
-
-        preview.gameObject.SetActive(false);
-        preview.transform.localScale = new Vector3( //unflip
-            -preview.transform.localScale.x,
-            preview.transform.localScale.y,
-            preview.transform.localScale.z
-        );
-        //Fix mobile rotation
-        Quaternion rot = Quaternion.Euler(0, 0, -90);
-        preview.gameObject.transform.rotation = rot;
 
         returnButton.gameObject.SetActive(false);
         returnButton.transform.SetAsLastSibling(); //rendered last - apear in top
 
         trashButton.gameObject.SetActive(false);
         trashButton.transform.SetAsLastSibling();
+
+        //Fix mobile rotation (mac is "normal")
+
+        preview.gameObject.SetActive(false);
+        preview.transform.localScale = new Vector3( //Unflip
+            -preview.transform.localScale.x,
+            preview.transform.localScale.y,
+            preview.transform.localScale.z
+        );
+        //Rotation wrong
+        Quaternion rot = Quaternion.Euler(0, 0, -90);
+        preview.gameObject.transform.rotation = rot;
     }
 
     private void UpdateText()
     {
+        //Change the button status according to quantity of taken images
         ColorBlock colors = snapButton.colors;
 
         if (count == 2)
@@ -70,6 +74,9 @@ public class PhotoCapture : MonoBehaviour
 
     private void TogglePreview(Texture2D tx)
     {
+        //Invert the status of the preview
+        //Show the image recorded
+
         preview.texture = tx;
         preview.gameObject.SetActive(!preview.gameObject.activeSelf);
 
@@ -81,11 +88,15 @@ public class PhotoCapture : MonoBehaviour
 
     public void DoSnap()
     {
+        //Save Image or send them to analysis
+
         camcon = FindObjectOfType<CameraController>();
+        imgprocess = FindObjectOfType<ImageProcessing>();
 
         if (count == 0) //Picture 1
         {
             pic1 = camcon.GetCamImage();
+
             count++;
 
             UpdateText();
@@ -109,7 +120,7 @@ public class PhotoCapture : MonoBehaviour
         }
         else
         {
-            Debug.Log("Recognition!!!");
+            imgprocess.Recognition(pic1, pic2);
         }
     }
 

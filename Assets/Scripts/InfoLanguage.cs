@@ -18,6 +18,7 @@ public class InfoLanguage : MonoBehaviour
 
     private void Start()
     {
+        //Setup
         langKey = "lang";
         count = PlayerPrefs.GetInt(langKey) - 1;
         UpdateLanguage();
@@ -25,7 +26,7 @@ public class InfoLanguage : MonoBehaviour
 
     //------------------ PUBLIC METHODS --------------------
 
-    public void UpdateLanguage()
+    public void UpdateLanguage() //Change according to flag order
     {
         count++;
         if (count > 3)

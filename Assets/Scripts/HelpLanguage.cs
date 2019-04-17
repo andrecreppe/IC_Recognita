@@ -18,6 +18,7 @@ public class HelpLanguage : MonoBehaviour
 
     private void Start()
     {
+        //Setup
         langKey = "lang";
         count = PlayerPrefs.GetInt(langKey) - 1;
         UpdateLanguage();
@@ -25,7 +26,7 @@ public class HelpLanguage : MonoBehaviour
 
     //------------------ PUBLIC METHODS --------------------
 
-    public void UpdateLanguage()
+    public void UpdateLanguage() //Change according to flag order
     {
         count++;
         if (count > 3)
@@ -40,7 +41,7 @@ public class HelpLanguage : MonoBehaviour
             case 1:
                 howTo.text = "Como utilizar o app:";
 
-                steps.text = "1) Alinhe o rosto com a\n\tborda vermelha\n\n" +
+                steps.text = "1) Alinhe seu rosto com a\n\tborda vermelha\n\n" +
                 	"2) Aperte o botão \"Snap!\";\n\n" +
                 	"2.1) Caso a imagem fique\n" +
                 	"\truim, clique no canto \n" +
@@ -56,7 +57,7 @@ public class HelpLanguage : MonoBehaviour
             case 2:
                 howTo.text = "How to use the app:";
 
-                steps.text = "1) Align the face with the \n" +
+                steps.text = "1) Align your face with the \n" +
                 	"\tred border;\n\n" +
                 	"2) Press the button \"Snap!\";\n\n" +
                 	"2.1) If the image get bad,\n" +

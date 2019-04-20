@@ -1,9 +1,9 @@
 ﻿<Properties StartupConfiguration="{8584B326-16EA-5EBB-70CD-2669415A1C13}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/InfoLanguage.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/PhotoCapture.cs">
     <Files>
-      <File FileName="Assets/Scripts/ImageProcessing.cs" Line="15" Column="20" />
+      <File FileName="Assets/Scripts/ImageProcessing.cs" Line="226" Column="32" />
       <File FileName="Assets/Scripts/Descriptors.cs" Line="8" Column="23" />
-      <File FileName="Assets/Scripts/InfoLanguage.cs" Line="21" Column="16" />
+      <File FileName="Assets/Scripts/PhotoCapture.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -11,7 +11,7 @@
           <Node name="IC_Recognita" expanded="True">
             <Node name="Assets" expanded="True">
               <Node name="Scripts" expanded="True">
-                <Node name="InfoLanguage.cs" selected="True" />
+                <Node name="PhotoCapture.cs" selected="True" />
               </Node>
             </Node>
           </Node>

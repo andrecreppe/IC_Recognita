@@ -1,8 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System.IO;
 
 public class ImageProcessing : MonoBehaviour
 {
@@ -12,7 +12,7 @@ public class ImageProcessing : MonoBehaviour
     private Texture2D gray1, gray2;
 
     public float[] tresholds; //Thresholds -> Determined by the matlab code
-    public RawImage block;
+    public RawImage block, block2;
 
     //---------------- PRIVATE METHODS --------------------
 
@@ -75,9 +75,25 @@ public class ImageProcessing : MonoBehaviour
         return resized;
     }
 
-    private float Comparison()
+    private float Comparison(int[,] pic1, int[,] pic2, int lin, int col)
     {
-        return 0.0f; //in percentage
+        int dist;
+        int[,] final = new int[lin, col];
+
+        for(int i=0; i<lin; i++)
+        {
+            for(int j=0; j<col; j++)
+            {
+                final[i,j] = Mathf.Abs(pic2[i, j] - pic1[i, j]);
+            }
+        }
+
+        dist = SumMat(final, lin, col);
+        //treshold comparison
+
+        dist = Mathf.RoundToInt(dist / (lin * col));
+
+        return dist;
     }
 
     private void ShowResults(float res)
@@ -88,17 +104,107 @@ public class ImageProcessing : MonoBehaviour
     //---------------- IMAGE DESCRIPTORS --------------------
     //Novo arquivo!
 
-    private void LBP(/*????*/)
+    private int[,] MatMultiplyer3x3(int[,] mat1, int[,] mat2)
     {
+        int[,] c = new int[3,3];
+
         for (int i = 0; i < 3; i++)
         {
             for (int j = 0; j < 3; j++)
             {
-
+                for (int k = 0; k < 3; k++)
+                {
+                    c[i, j] = mat1[i, k] * mat2[k, j];
+                }
             }
         }
+
+        return c;
     }
 
+    private int[,] CompareToElement3x3(int[,] mat, int elem)
+    {
+        int[,] neww = new int[3,3];
+
+        for(int i=0; i<3; i++)
+        {
+            for(int j=0; j<3; j++)
+            {
+                if (mat[i, j] > elem)
+                    neww[i, j] = 1;
+                else
+                    neww[i, j] = 0;
+            }
+        }
+
+        return neww;
+    }
+
+    private int SumMat(int[,] mat, int lin, int col)
+    {
+        int sum = 0;
+        for(int i=0; i<lin; i++)
+        {
+            for(int j=0; j<col; j++)
+            {
+                sum += mat[i, j];
+            }
+        }
+
+        return sum;
+    }
+
+    private int[,] ExtractLBPFeatures(Texture2D pic)
+    {
+        //PHASE 1 -> Conversion to Integers
+        Color[] uni = pic.GetPixels();
+        int[,] mat = new int[pic.height, pic.width];
+        int count = 0;
+
+        for (int i = 0; i < pic.height; i++)
+        {
+            for (int j = 0; j < pic.width; j++)
+            {
+                mat[i, j] = Mathf.RoundToInt(uni[count++].r * 255);
+            }
+        }
+
+        ////////////////////////////////////////////
+        //PHASE 2 -> Matrix Manipulation
+
+        int[,] pic_new = new int[pic.height, pic.width];
+        int[,] mini_area = new int[3, 3];
+        int[,] pesos = {
+            { 1, 2, 4 },
+            { 128, 0, 8 },
+            { 64, 32, 16 }
+        };
+
+        for (int i = 1; i < pic.height - 2; i++)
+        {
+            for (int j = 1; j < pic.width - 2; j++)
+            {
+                mini_area[0,0] = mat[i - 1, j - 1];
+                mini_area[0,1] = mat[i - 1, j];
+                mini_area[0,2] = mat[i - 1, j + 1];
+                mini_area[1,0] = mat[i, j - 1];
+                mini_area[1,1] = mat[i, j];
+                mini_area[1,2] = mat[i, j + 1];
+                mini_area[2,0] = mat[i + 1, j - 1];
+                mini_area[2,1] = mat[i + 1, j];
+                mini_area[2,2] = mat[i + 1, j + 1];
+
+                pic_new[i, j] = SumMat(MatMultiplyer3x3(
+                    CompareToElement3x3(
+                        mini_area, mini_area[1, 1]
+                    ), pesos
+                ), 3, 3
+                );
+            }
+        }
+
+        return pic_new;
+    }
 
 
     //---------------- PUBLIC METHODS --------------------
@@ -106,6 +212,10 @@ public class ImageProcessing : MonoBehaviour
     //public float Recognition(Texture2D img1, Texture2D img2
     public void Recognition(Texture2D texture1, Texture2D texture2)
     {
+        Descriptors dec = FindObjectOfType<Descriptors>();
+
+        Debug.Log("Before: " + Time.realtimeSinceStartup);
+
         gray1 = ConvertToGrayscale(texture1);
         gray2 = ConvertToGrayscale(texture2);
 
@@ -113,12 +223,15 @@ public class ImageProcessing : MonoBehaviour
         gray2 = CutImage(gray2);
 
         block.texture = gray1;
+        block2.texture = gray2;
 
-        //------------------------------------------
+        float resp = Comparison(
+            ExtractLBPFeatures(gray1), ExtractLBPFeatures(gray2),
+            gray1.height, gray1.width
+        );
 
-        //LBP(); //Use different methods also
-
-        //float resp = Comparison();
+        Debug.Log("resp = " + resp);
+        Debug.Log("After: " + Time.realtimeSinceStartup);
 
         //ShowResults(resp);
     }

@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -9,8 +6,6 @@ public class CameraController : MonoBehaviour
 {
     //------------------ VARIABLES --------------------
 
-    private string langKey;
-    private int count;
     private bool camAvailable, isBackCamera;
     private WebCamTexture backCamera, frontCamera, activeCamera;
     private Texture defaultBackground;
@@ -24,10 +19,6 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
-        //Setup Configs
-        langKey = "lang";
-        count = 0;
-
         IsFirstTime();
 
         //Setup Enviroment
@@ -40,7 +31,9 @@ public class CameraController : MonoBehaviour
         //Camera Detection
         if(devices.Length == 0)
         {
-            CameraError(1);
+            CameraLanguage camlang = FindObjectOfType<CameraLanguage>();
+
+            camlang.CameraError(1);
             
             camAvailable = false;
             return;
@@ -103,13 +96,15 @@ public class CameraController : MonoBehaviour
 
     private void TestCamera() //Test if camera is working (start error or not)
     {
+        CameraLanguage camlang = FindObjectOfType<CameraLanguage>();
+
         if(activeCamera == null)
         {
             background.texture = defaultBackground;
 
             camAvailable = false;
 
-            CameraError(2);
+            camlang.CameraError(2);
 
             snapButton.gameObject.SetActive(false);
         }
@@ -121,48 +116,10 @@ public class CameraController : MonoBehaviour
 
             camAvailable = true;
 
-            CameraError(0);
+            camlang.CameraError(0);
 
             snapButton.gameObject.SetActive(true);
         }
-    }
-
-    private void CameraError(int op)
-    {
-        string msg = "";
-
-        if (op == 1) //Not available
-        {
-            switch(PlayerPrefs.GetInt(langKey))
-            {
-                case 1: //Pt
-                    msg = "ERRO!\n\nNenhuma\ncâmera\ndetectada!\n:(";
-                    break;
-                case 2: //En
-                    msg = "ERROR!\n\nNo camera\ndetected!\n:(";
-                    break;
-                case 3: //De
-                    msg = "FEHLER!\n\nKeine kamera\nerkannt!\n:(";
-                    break;
-            }
-        }
-        else if(op == 2) //Not found
-        {
-            switch (PlayerPrefs.GetInt(langKey))
-            {
-                case 1: //Pt
-                    msg = "ERRO!\n\nCâmera não\ndisponível\n:(";
-                    break;
-                case 2: //En
-                    msg = "ERROR!\n\nCamera not\navailable\n:(";
-                    break;
-                case 3: //De
-                    msg = "FEHLER!\n\nKamera nicht\nerhältlich\n:(";
-                    break;
-            }
-        }
-
-        errorMsg.text = msg;
     }
 
     private void IsFirstTime()

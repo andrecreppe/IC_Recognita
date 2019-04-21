@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class InfoLanguage : MonoBehaviour
@@ -9,8 +7,9 @@ public class InfoLanguage : MonoBehaviour
 
     private int count;
     private string langKey;
+    private bool contactAndre, contactNilceu;
 
-    public Text info, developers;
+    public Text info, andre, nilceu;
     public Button langButton;
     public Sprite[] flags;
 
@@ -19,6 +18,9 @@ public class InfoLanguage : MonoBehaviour
     private void Start()
     {
         //Setup
+        contactAndre = false;
+        contactNilceu = false;
+
         langKey = "lang";
         count = PlayerPrefs.GetInt(langKey) - 1;
         UpdateLanguage();
@@ -46,9 +48,10 @@ public class InfoLanguage : MonoBehaviour
                 "utilizando elementos da \n" +
                 "face e da região ocular.";
 
-                developers.text = "Aluno Bolsista:\n" +
-                    "\tAndré Z. Creppe\n\n" +
-                    "Professor Orientador:\n" +
+                andre.text = "Aluno Bolsista:\n" +
+                    "\tAndré Z. Creppe";
+
+                nilceu.text = "Professor Orientador:\n" +
                     "\tProf. Dr. Nilceu Marana";
 
                 break;
@@ -62,9 +65,10 @@ public class InfoLanguage : MonoBehaviour
                 "elements of the face and \n" +
                 "ocular region.";
 
-                developers.text = "Initiation Student:\n" +
-                    "\tAndré Z. Creppe\n\n" +
-                    "Advisor Teacher:\n" +
+                andre.text = "Initiation Student:\n" +
+                    "\tAndré Z. Creppe";
+
+                nilceu.text = "Advisor Teacher:\n" +
                     "\tProf. Dr. Nilceu Marana";
 
                 break;
@@ -79,9 +83,10 @@ public class InfoLanguage : MonoBehaviour
                 "und des Augengebiets \n" +
                 "testen soll.";
 
-                developers.text = "Wissenchaftlichte Student:\n" +
-                    "\tAndré Z. Creppe\n\n" +
-                    "Ratgeber Lehrer:\n" +
+                andre.text = "Wissenchaftlichte Student:\n" +
+                    "\tAndré Z. Creppe";
+
+                nilceu.text = "Ratgeber Lehrer:\n" +
                     "\tProf. Dr. Nilceu Marana";
 
                 break;
@@ -89,5 +94,63 @@ public class InfoLanguage : MonoBehaviour
 
         //Change the flag icon
         langButton.image.sprite = flags[count - 1];
+    }
+
+    public void ContactAndre()
+    {
+        contactAndre = !contactAndre;
+
+        if(contactAndre)
+        {
+            switch(count)
+            {
+                case 1: //Portugues
+                    andre.text = "Contato André:\n" +
+                        "\tandre.creppe@uol.com.br";
+                    break;
+                case 2: //English
+                    andre.text = "André's contact:\n" +
+                        "\tandre.creppe@uol.com.br";
+                    break;
+                case 3: //Deutsch
+                    andre.text = "André Kontakt:\n" +
+                        "\tandre.creppe@uol.com.br";
+                    break;
+            }
+        }
+        else
+        {
+            count--;
+            UpdateLanguage();
+        }
+    }
+
+    public void ContactNilceu()
+    {
+        contactNilceu = !contactNilceu;
+
+        if (contactNilceu)
+        {
+            switch (count)
+            {
+                case 1: //Portugues
+                    nilceu.text = "Contato Nilceu:\n" +
+                        "\tnilceu@fc.unesp.br";
+                    break;
+                case 2: //English
+                    nilceu.text = "Nilceu's contact:\n" +
+                        "\tnilceu@fc.unesp.br";
+                    break;
+                case 3: //Deutsch
+                    nilceu.text = "Nilceu Kontakt:\n" +
+                        "\tnilceu@fc.unesp.br";
+                    break;
+            }
+        }
+        else
+        {
+            count--;
+            UpdateLanguage();
+        }
     }
 }

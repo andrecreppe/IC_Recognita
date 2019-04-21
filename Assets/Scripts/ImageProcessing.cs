@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,42 +16,68 @@ public class ImageProcessing : MonoBehaviour
     private void ShowResults(double resp, double treshold)
     {
         CameraController camcon = FindObjectOfType<CameraController>();
+        CameraLanguage camlang = FindObjectOfType<CameraLanguage>();
+        double perc;
+        bool thesame;
 
         //Set the Result Display active
         result_menu.gameObject.SetActive(!result_menu.gameObject.activeSelf);
         camcon.ChangeCameraStatus();
 
+        thesame = resp <= treshold;
 
-        if (resp <= treshold) //Equal images
+        if (thesame) //Equal images
         {
-            //Color green
-            //HEX = 37912D
+            perc = (2100 / resp) + 9;
+            camlang.Result(Math.Round(perc, 2), true);
         }
         else //Different Images
         {
-            //Color red
-            //HEX = 91502D
+            resp -= treshold;
+            perc = resp * 100 / (115-treshold);
+            camlang.Result(Math.Round(perc, 2), false);
         }
-
-        //Change the text
-        //sent to camera languae -> ok or not ok
-
-        //Calculate the percentage
-        //result.text += "\n(" + perc  + "%" + getsimilar() + ")";
+        
+        SaveResult(resp, perc, thesame);
     }
 
-    private void SaveResult()
+    private void SaveResult(double resp, double perc, bool equal) //Save the results in a log
     {
-        //See below
         if(saveData)
         {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream fs;
+            string log, path;
 
+            path = Application.persistentDataPath + "/results.log";
+            log = "";
+
+            //Check if a file exists
+            if (File.Exists(path)) 
+            {
+                //Load file
+                fs = File.Open(path, FileMode.Open);
+                log = (string)bf.Deserialize(fs);
+                fs.Close();
+            }
+
+            //Build the new log structure
+            log += "Date: " + DateTime.Now;
+            log += "\nPdist: " + resp;
+            log += "\nEquality: " + equal;
+            log += "\nPercentage: " + perc;
+            log += "\n----------------------------\n";
+
+            //Create the results
+            fs = File.Create(path);
+            bf.Serialize(fs, log);
+            fs.Close();
         }
     }
 
     //---------------- PUBLIC METHODS --------------------
 
-    public void Recognition(Texture2D img1, Texture2D img2)
+    public void Recognition(Texture2D img1, Texture2D img2) //Use LBP to find the similarity between two images
     {
         Descriptors dec = FindObjectOfType<Descriptors>();
         double resp; 
@@ -61,7 +87,7 @@ public class ImageProcessing : MonoBehaviour
         ShowResults(resp, dec.LBP_treshold);
     }
 
-    public void CloseResults()
+    public void CloseResults() //Close the results tab
     {
         CameraController camcon = FindObjectOfType<CameraController>();
 
@@ -69,67 +95,3 @@ public class ImageProcessing : MonoBehaviour
         camcon.ChangeCameraStatus();
     }
 }
-
-/*
-public void SaveGame()
-{
-    // 1
-    Save save = CreateSaveGameObject();
-
-    // 2
-    BinaryFormatter bf = new BinaryFormatter();
-    FileStream file = File.Create(Application.persistentDataPath + "/gamesave.save");
-    bf.Serialize(file, save);
-    file.Close();
-
-    // 3
-    hits = 0;
-    shots = 0;
-    shotsText.text = "Shots: " + shots;
-    hitsText.text = "Hits: " + hits;
-
-    ClearRobots();
-    ClearBullets();
-    Debug.Log("Game Saved");
-}      
-
-public void LoadGame()
-{ 
-    // 1
-    if (File.Exists(Application.persistentDataPath + "/gamesave.save"))
-    {
-    ClearBullets();
-    ClearRobots();
-    RefreshRobots();
-
-    // 2
-    BinaryFormatter bf = new BinaryFormatter();
-    FileStream file = File.Open(Application.persistentDataPath + "/gamesave.save", FileMode.Open);
-    Save save = (Save)bf.Deserialize(file);
-    file.Close();
-
-    // 3
-    for (int i = 0; i < save.livingTargetPositions.Count; i++)
-    {
-     int position = save.livingTargetPositions[i];
-     Target target = targets[position].GetComponent<Target>();
-     target.ActivateRobot((RobotTypes)save.livingTargetsTypes[i]);
-     target.GetComponent<Target>().ResetDeathTimer();
-    }
-
-    // 4
-    shotsText.text = "Shots: " + save.shots;
-    hitsText.text = "Hits: " + save.hits;
-    shots = save.shots;
-    hits = save.hits;
-
-    Debug.Log("Game Loaded");
-
-    Unpause();
-    }
-    else
-    {
-    Debug.Log("No game saved!");
-    }
-}      
-*/

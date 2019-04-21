@@ -929,6 +929,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 205c3650bf9c94f47b7c2aad856f79c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dataTxt: {fileID: 1504759659}
+  resultsTxt: {fileID: 1471195800}
+  errorTxt: {fileID: 2124991157}
 --- !u!1 &1463379972
 GameObject:
   m_ObjectHideFlags: 0
@@ -1364,7 +1367,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 507f4aa147d814171a71be3f9856ea16, type: 3}
-    m_FontSize: 300
+    m_FontSize: 265
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1

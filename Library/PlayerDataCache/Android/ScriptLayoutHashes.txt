@@ -1,6 +1,6 @@
 Android
 PlayerPath?
-/Users/andrecreppe/Desktop/IC_Recognita/Builds/Recognita-0.6.apk
+/Users/andrecreppe/Desktop/IC_Recognita/Builds/Recognita-v0.6.apk
 SceneListBegin?
 Assets/Scenes/Camera.unity
 Assets/Scenes/Info.unity

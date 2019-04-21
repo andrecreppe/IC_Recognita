@@ -213,7 +213,7 @@ GameObject:
   - component: {fileID: 168602607}
   - component: {fileID: 168602606}
   m_Layer: 5
-  m_Name: Image - Meme
+  m_Name: Image - Thinking Meme
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

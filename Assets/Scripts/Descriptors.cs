@@ -5,7 +5,7 @@ public class Descriptors : MonoBehaviour
 {
     //---------------- VARIABLES --------------------
 
-    public readonly double LBP_treshold = 36.4;
+    public readonly double LBP_treshold = 43.5;
 
     //---------------- PREPARATION METHODS --------------------
 

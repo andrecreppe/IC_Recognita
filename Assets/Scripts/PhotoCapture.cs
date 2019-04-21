@@ -178,4 +178,11 @@ public class PhotoCapture : MonoBehaviour
         else
             pic2_show = false;
     }
+
+    public void DeletePictures()
+    {
+        pic1_show = true;
+        RemoveSelectedPicture();
+        RemoveSelectedPicture();
+    }
 }

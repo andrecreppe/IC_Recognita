@@ -80,11 +80,14 @@ public class ImageProcessing : MonoBehaviour
     public void Recognition(Texture2D img1, Texture2D img2) //Use LBP to find the similarity between two images
     {
         Descriptors dec = FindObjectOfType<Descriptors>();
+        PhotoCapture photcap = FindObjectOfType<PhotoCapture>();
         double resp; 
         
         resp = dec.CompareImages(img1, img2);
 
         ShowResults(resp, dec.LBP_treshold);
+
+        photcap.DeletePictures();
     }
 
     public void CloseResults() //Close the results tab

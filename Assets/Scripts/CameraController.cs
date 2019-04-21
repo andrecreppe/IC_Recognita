@@ -20,6 +20,7 @@ public class CameraController : MonoBehaviour
     private void Start()
     {
         IsFirstTime();
+        IsFirstTime();
 
         //Setup Enviroment
         defaultBackground = background.texture;

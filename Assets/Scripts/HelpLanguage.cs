@@ -9,7 +9,8 @@ public class HelpLanguage : MonoBehaviour
     private string langKey;
 
     public Text howTo, steps;
-    public Button langButton;
+    public Button langButton, memeButton;
+    public Sprite left, right; 
     public Sprite[] flags;
 
     //------------------ PRIVATE METHODS --------------------
@@ -24,7 +25,8 @@ public class HelpLanguage : MonoBehaviour
 
     //------------------ PUBLIC METHODS --------------------
 
-    public void UpdateLanguage() //Change according to flag order
+    /* Change the language according to flag order */
+    public void UpdateLanguage()
     {
         count++;
         if (count > 3)
@@ -90,5 +92,15 @@ public class HelpLanguage : MonoBehaviour
 
         //Change the flag icon
         langButton.image.sprite = flags[count - 1];
+    }
+
+    /* Flip the meme! */
+    /* 'Modern problems require modern solutions' */
+    public void FlipMeme()
+    {
+        if (memeButton.image.sprite == right)
+            memeButton.image.sprite = left;
+        else
+            memeButton.image.sprite = right;
     }
 }

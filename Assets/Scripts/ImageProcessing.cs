@@ -13,11 +13,11 @@ public class ImageProcessing : MonoBehaviour
 
     //---------------- PRIVATE METHODS -------------------
 
+    /* Display the result panel with the comparison result */
     private void ShowResults(double resp, double treshold)
     {
         CameraController camcon = FindObjectOfType<CameraController>();
         CameraLanguage camlang = FindObjectOfType<CameraLanguage>();
-        double perc;
         bool thesame;
 
         //Set the Result Display active
@@ -27,21 +27,15 @@ public class ImageProcessing : MonoBehaviour
         thesame = resp <= treshold;
 
         if (thesame) //Equal images
-        {
-            perc = (2100 / resp) + 9;
-            camlang.Result(Math.Round(perc, 2), true);
-        }
+            camlang.Result(resp, true);
         else //Different Images
-        {
-            resp -= treshold;
-            perc = resp * 100 / (115-treshold);
-            camlang.Result(Math.Round(perc, 2), false);
-        }
+            camlang.Result(resp, false);
         
-        SaveResult(resp, perc, thesame);
+        //SaveResult(resp, perc, thesame);
     }
 
-    private void SaveResult(double resp, double perc, bool equal) //Save the results in a log
+    /* Save the results as a log */
+    private void SaveResult(double resp, double perc, bool equal)
     {
         if(saveData)
         {
@@ -77,7 +71,8 @@ public class ImageProcessing : MonoBehaviour
 
     //---------------- PUBLIC METHODS --------------------
 
-    public void Recognition(Texture2D img1, Texture2D img2) //Use LBP to find the similarity between two images
+    /* Manage the recognition calling -> Execute the comparison order */
+    public void Recognition(Texture2D img1, Texture2D img2)
     {
         Descriptors dec = FindObjectOfType<Descriptors>();
         PhotoCapture photcap = FindObjectOfType<PhotoCapture>();
@@ -90,7 +85,8 @@ public class ImageProcessing : MonoBehaviour
         photcap.DeletePictures();
     }
 
-    public void CloseResults() //Close the results tab
+    /* Close the results tab */
+    public void CloseResults()
     {
         CameraController camcon = FindObjectOfType<CameraController>();
 

@@ -7,7 +7,7 @@ public class InfoLanguage : MonoBehaviour
 
     private int count;
     private string langKey;
-    private bool contactAndre, contactNilceu;
+    private bool emailAndre, emailNilceu;
 
     public Text info, andre, nilceu;
     public Button langButton;
@@ -18,91 +18,20 @@ public class InfoLanguage : MonoBehaviour
     private void Start()
     {
         //Setup
-        contactAndre = false;
-        contactNilceu = false;
+        emailAndre = false;
+        emailNilceu = false;
 
         langKey = "lang";
         count = PlayerPrefs.GetInt(langKey) - 1;
         UpdateLanguage();
     }
 
-    //------------------ PUBLIC METHODS --------------------
-
-    public void UpdateLanguage() //Change according to flag order
+    /* Change the 'André' content */
+    private void AndreText()
     {
-        count++;
-        if (count > 3)
-            count = 1;
-
-        PlayerPrefs.SetInt(langKey, count);
-        PlayerPrefs.Save();
-
-        switch (count)
+        if (emailAndre)
         {
-            //Português
-            case 1: 
-                info.text = "Projeto de Iniciação\n" +
-                "Científica voltado para\n" +
-                "testar a efetividade de\n" +
-                "um sistema biometrico\n" +
-                "utilizando elementos da \n" +
-                "face e da região ocular.";
-
-                andre.text = "Aluno Bolsista:\n" +
-                    "\tAndré Z. Creppe";
-
-                nilceu.text = "Professor Orientador:\n" +
-                    "\tProf. Dr. Nilceu Marana";
-
-                break;
-
-            //English
-            case 2:
-                info.text = "Scientific Initiation Project \n" +
-                "designed to test the \n" +
-                "effectiveness of a \n" +
-                "biometric system utilizing \n" +
-                "elements of the face and \n" +
-                "ocular region.";
-
-                andre.text = "Initiation Student:\n" +
-                    "\tAndré Z. Creppe";
-
-                nilceu.text = "Advisor Teacher:\n" +
-                    "\tProf. Dr. Nilceu Marana";
-
-                break;
-
-            //Deutsch
-            case 3:
-                info.text = "Wissenschaftliches \n" +
-                "Initiationsprojekt, \n" +
-                "das die Wirksamkeit eines \n" +
-                "biometrischen Systems mit \n" +
-                "Elementen des Gesichts \n" +
-                "und des Augengebiets \n" +
-                "testen soll.";
-
-                andre.text = "Wissenchaftlichte Student:\n" +
-                    "\tAndré Z. Creppe";
-
-                nilceu.text = "Ratgeber Lehrer:\n" +
-                    "\tProf. Dr. Nilceu Marana";
-
-                break;
-        }
-
-        //Change the flag icon
-        langButton.image.sprite = flags[count - 1];
-    }
-
-    public void ContactAndre()
-    {
-        contactAndre = !contactAndre;
-
-        if(contactAndre)
-        {
-            switch(count)
+            switch (count) //Show contacts
             {
                 case 1: //Portugues
                     andre.text = "Contato André:\n" +
@@ -120,16 +49,28 @@ public class InfoLanguage : MonoBehaviour
         }
         else
         {
-            count--;
-            UpdateLanguage();
+            switch (count) //Show Persons
+            {
+                case 1: //Portugues
+                    andre.text = "Aluno Bolsista:\n" +
+                        "\tAndré Z. Creppe";
+                    break;
+                case 2: //English
+                    andre.text = "Initiation Student:\n" +
+                        "\tAndré Z. Creppe";
+                    break;
+                case 3: //Deutsch
+                    andre.text = "Wissenchaftlichte Student:\n" +
+                        "\tAndré Z. Creppe";
+                    break;
+            }
         }
     }
 
-    public void ContactNilceu()
+    /* Change the 'Nilceu' content */
+    private void NilceuText()
     {
-        contactNilceu = !contactNilceu;
-
-        if (contactNilceu)
+        if (emailNilceu) //Show Contact
         {
             switch (count)
             {
@@ -149,8 +90,99 @@ public class InfoLanguage : MonoBehaviour
         }
         else
         {
-            count--;
-            UpdateLanguage();
+            switch (count) //Show Persons
+            {
+                case 1: //Portugues
+                    nilceu.text = "Professor Orientador:\n" +
+                        "\tProf. Dr. Nilceu Marana";
+                    break;
+                case 2: //English
+                    nilceu.text = "Advisor Teacher:\n" +
+                        "\tProf. Dr. Nilceu Marana";
+                    break;
+                case 3: //Deutsch
+                    nilceu.text = "Ratgeber Lehrer:\n" +
+                        "\tProf. Dr. Nilceu Marana";
+                    break;
+            }
         }
+    }
+
+    //------------------ PUBLIC METHODS --------------------
+
+    /* Change the language according to the flag order */
+    public void UpdateLanguage()
+    {
+        count++;
+        if (count > 3)
+            count = 1;
+
+        PlayerPrefs.SetInt(langKey, count);
+        PlayerPrefs.Save();
+
+        switch (count)
+        {
+            //Português
+            case 1: 
+                info.text = "Projeto de Iniciação\n" +
+                "Científica voltado para\n" +
+                "testar a efetividade de\n" +
+                "um sistema biometrico\n" +
+                "utilizando elementos da \n" +
+                "face e da região ocular.";
+
+                AndreText();
+                NilceuText();
+
+                break;
+
+            //English
+            case 2:
+                info.text = "Scientific Initiation Project \n" +
+                "designed to test the \n" +
+                "effectiveness of a \n" +
+                "biometric system utilizing \n" +
+                "elements of the face and \n" +
+                "ocular region.";
+
+                AndreText();
+                NilceuText();
+
+                break;
+
+            //Deutsch
+            case 3:
+                info.text = "Wissenschaftliches \n" +
+                "Initiationsprojekt, \n" +
+                "das die Wirksamkeit eines \n" +
+                "biometrischen Systems mit \n" +
+                "Elementen des Gesichts \n" +
+                "und des Augengebiets \n" +
+                "testen soll.";
+
+                AndreText();
+                NilceuText();
+
+                break;
+        }
+
+        //Change the flag icon
+        langButton.image.sprite = flags[count - 1];
+    }
+
+    /* Flip 'Andre' content state */
+    public void ContactAndre()
+    {
+        emailAndre = !emailAndre;
+
+        AndreText();
+    }
+
+    /* Flip 'Nilceu' content state */
+    public void ContactNilceu()
+    {
+        emailNilceu = !emailNilceu;
+
+        NilceuText();
     }
 }

@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class CameraController : MonoBehaviour
 {
@@ -13,27 +12,31 @@ public class CameraController : MonoBehaviour
     public RawImage background;
     public AspectRatioFitter fit;
     public Text errorMsg;
-    public Button snapButton;
+    public Button snapButton, reloadButton;
 
     //---------------- PRIVATE METHODS --------------------
 
+    private void Awake()
+    {
+        CameraLanguage camlang = FindObjectOfType<CameraLanguage>();
+
+        camlang.CameraError(2);
+        reloadButton.gameObject.SetActive(true);
+        reloadButton.transform.SetAsLastSibling();
+    }
+
     private void Start()
     {
-        IsFirstTime();
-        IsFirstTime();
+        CameraLanguage camlang = FindObjectOfType<CameraLanguage>();
 
         //Setup Enviroment
         defaultBackground = background.texture;
 
         WebCamDevice[] devices = WebCamTexture.devices;
 
-        errorMsg.text = "";
-
-        //Camera Detection
+        //No camera detection
         if(devices.Length == 0)
         {
-            CameraLanguage camlang = FindObjectOfType<CameraLanguage>();
-
             camlang.CameraError(1);
             
             camAvailable = false;
@@ -95,7 +98,8 @@ public class CameraController : MonoBehaviour
         background.rectTransform.localEulerAngles = new Vector3(0, 0, orient);
     }
 
-    private void TestCamera() //Test if camera is working (start error or not)
+    //Test if camera is working (start error or not)
+    private void TestCamera()
     {
         CameraLanguage camlang = FindObjectOfType<CameraLanguage>();
 
@@ -108,6 +112,7 @@ public class CameraController : MonoBehaviour
             camlang.CameraError(2);
 
             snapButton.gameObject.SetActive(false);
+            reloadButton.gameObject.SetActive(true);
         }
         else
         {
@@ -120,33 +125,35 @@ public class CameraController : MonoBehaviour
             camlang.CameraError(0);
 
             snapButton.gameObject.SetActive(true);
-        }
-    }
-
-    private void IsFirstTime()
-    {
-        /*
-         * This method is for after allowing access to the app
-         * it restarts and initiate with all cameras loaded;
-        */
-
-        if(!PlayerPrefs.HasKey("first")) //is the first time
-        {
-            PlayerPrefs.SetInt("first", 1);
-            PlayerPrefs.Save();
-
-            //Reload scene
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            reloadButton.gameObject.SetActive(false);
         }
     }
 
     //---------------- PUBLIC METHODS --------------------
 
+    /* Get the camAvailable state */
     public bool GetCamAvailable()
     {
         return this.camAvailable;
     }
 
+    /* Get what camera is active now */
+    public int GetWichCamera() 
+    {
+        int ret = 0;
+
+        if(camAvailable) //Has working cameras
+        {
+            if (activeCamera == backCamera)
+                ret = 1; //back camera
+            else
+                ret = 2; //front camera
+        }
+
+        return ret;
+    }
+
+    /* Swap Cameras */
     public void ChangeCameras()
     {
         //Frontcamera -> Backcamera
@@ -165,7 +172,8 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    public Texture2D GetCamImage() //Save the current image frame
+    /* Save the current image frame */
+    public Texture2D GetCamImage()
     {
         activeCamera.Pause();
 
@@ -174,11 +182,8 @@ public class CameraController : MonoBehaviour
         snap.SetPixels(activeCamera.GetPixels());
         snap.Apply();
 
-        //TEST IF THIS IS CORRECT!!!!
-
-        if(isBackCamera) //Image Upside down (backCamera)
+        if (isBackCamera) //Image Upside down (backCamera)
         {
-            //Inverted because the image is inverted
             int yN = snap.width;
             int xN = snap.height;
 
@@ -201,7 +206,8 @@ public class CameraController : MonoBehaviour
         return snap;
     }
 
-    public void ChangeCameraStatus() //Invert camera status (pause or running)
+    /* Invert camera status (pause or running) */
+    public void ChangeCameraStatus() 
     {
         if(camAvailable)
         {
@@ -213,5 +219,11 @@ public class CameraController : MonoBehaviour
             activeCamera.Play();
             camAvailable = true;
         }
+    }
+
+    /* Reload the initial setup */
+    public void ReloadCameras()
+    {
+        Start();
     }
 }

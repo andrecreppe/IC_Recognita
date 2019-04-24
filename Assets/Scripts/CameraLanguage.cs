@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class CameraLanguage : MonoBehaviour
@@ -8,7 +9,7 @@ public class CameraLanguage : MonoBehaviour
     private int count;
     private string langKey;
 
-    public Text dataTxt, resultsTxt, errorTxt;
+    public Text dataTxt, resultsTxt, errorTxt, reloadTxt;
 
     //---------------- PRIVATE METHODS -------------------
 
@@ -21,6 +22,7 @@ public class CameraLanguage : MonoBehaviour
         UpdateResults();
     }
 
+    /* Update the results 'introduction' panel language */
     private void UpdateResults()
     {
         string txt = "error";
@@ -41,6 +43,7 @@ public class CameraLanguage : MonoBehaviour
         resultsTxt.text = txt;
     }
 
+    /* Update the language at 'result' at result panel */
     private string ResultLang(bool equal)
     {
         if(equal)
@@ -71,6 +74,7 @@ public class CameraLanguage : MonoBehaviour
         return "ERROR!";
     }
 
+    /* Update the language at 'percentage' in the panel */
     private string PercentageLang(bool equal)
     {
         if (equal)
@@ -103,6 +107,7 @@ public class CameraLanguage : MonoBehaviour
 
     //---------------- PUBLIC METHODS --------------------
 
+    /* Format the result panel */
     public void Result(double percent, bool equal)
     {
         Color32 cor;
@@ -118,7 +123,8 @@ public class CameraLanguage : MonoBehaviour
         txt = ResultLang(equal);
 
         //Format the percentage
-        txt += "\n\n(" + percent + "% " + PercentageLang(equal) + ")";
+        //txt += "\n\n(" + percent + " pdist\n " + PercentageLang(equal) + ")";
+        txt += "\n\n(Pdist = " + Math.Round(percent, 5) + ")";
 
         //Set the result
         dataTxt.color = cor;
@@ -126,9 +132,10 @@ public class CameraLanguage : MonoBehaviour
 
     }
 
+    /* Set the language of the error */
     public void CameraError(int op)
     {
-        string msg = "";
+        string msg = "", msg2 = "";
 
         if (op == 1) //Not available
         {
@@ -136,12 +143,15 @@ public class CameraLanguage : MonoBehaviour
             {
                 case 1: //Pt
                     msg = "ERRO!\n\nNenhuma\ncâmera\ndetectada!\n:(";
+                    msg2 = "Recarregar";
                     break;
                 case 2: //En
                     msg = "ERROR!\n\nNo camera\ndetected!\n:(";
+                    msg2 = "Reload";
                     break;
                 case 3: //De
                     msg = "FEHLER!\n\nKeine kamera\nerkannt!\n:(";
+                    msg2 = "Aufladen";
                     break;
             }
         }
@@ -151,16 +161,20 @@ public class CameraLanguage : MonoBehaviour
             {
                 case 1: //Pt
                     msg = "ERRO!\n\nCâmera não\ndisponível\n:(";
+                    msg2 = "Reccaregar";
                     break;
                 case 2: //En
                     msg = "ERROR!\n\nCamera not\navailable\n:(";
+                    msg2 = "Reload";
                     break;
                 case 3: //De
                     msg = "FEHLER!\n\nKamera nicht\nerhältlich\n:(";
+                    msg2 = "Aufladen";
                     break;
             }
         }
 
         errorTxt.text = msg;
+        reloadTxt.text = msg2;
     }
 }

@@ -5,11 +5,12 @@ public class Descriptors : MonoBehaviour
 {
     //---------------- VARIABLES --------------------
 
-    public readonly double LBP_treshold = 43.5;
+    public readonly double LBP_treshold = 62.4;
 
     //---------------- PREPARATION METHODS --------------------
 
-    private Texture2D ConvertToGrayscale(Texture2D graph) //Gray the image
+    /* Convert a image to gray */
+    private Texture2D ConvertToGrayscale(Texture2D graph)
     {
         Color32[] pixels = graph.GetPixels32();
         for (int x = 0; x < graph.width; x++)
@@ -33,7 +34,8 @@ public class Descriptors : MonoBehaviour
         return graph;
     }
 
-    private Texture2D CutImage(Texture2D raw) //Resize for make the LBP
+    /* Resize the image to make the LBP */
+    private Texture2D CutImage(Texture2D raw)
     {
         double calc, w, h;
 
@@ -62,9 +64,10 @@ public class Descriptors : MonoBehaviour
         return resized;
     }
 
-    //---------------- LBP PREQUIRED METHODS --------------------
+    //---------------- MATRIX MANIPULATION METHODS --------------------
 
-    private int[,] MatMultiplyer3x3(int[,] mat1, int[,] mat2) //Multiply 3x3 Matrix
+    /* Multiply two 3x3 Matrix */
+    private int[,] MatMultiplyer3x3(int[,] mat1, int[,] mat2)
     {
         int[,] c = new int[3, 3];
 
@@ -78,7 +81,9 @@ public class Descriptors : MonoBehaviour
 
         return c;
     }
-    private int[,] CompareToElement3x3(int[,] mat, int elem) //Compare a 3x3 matrix to a certain element
+
+    /* Compare a 3x3 matrix to a certain element (binary comparison - 0 or 1) */
+    private int[,] CompareToElement3x3(int[,] mat, int elem)
     {
         int[,] neww = new int[3, 3];
 
@@ -96,7 +101,8 @@ public class Descriptors : MonoBehaviour
         return neww;
     }
 
-    private int SumMat(int[,] mat, int lin, int col) //Add all numbers from one matrix
+    /* Add all elements from one matrix */
+    private int SumMat(int[,] mat, int lin, int col)
     {
         int sum = 0;
         for (int i = 0; i < lin; i++)
@@ -110,23 +116,66 @@ public class Descriptors : MonoBehaviour
         return sum;
     }
 
-    private double Pdist(int[] hist1, int[] hist2) //Calculate the distance of 2 vectors
-    {
-        double sum = 0;
+    //---------------- DISTANCE CALCULATORS METHODS --------------------
 
-        for(int i=0; i<hist1.Length; i++)
+    /* Calculate the Euclidian Distance between two histograms */
+    /* Result = number */
+    private double PdistEuclidian(int[] hist1, int[] hist2)
+    {
+        double euclidian = 0;
+
+        for (int i = 0; i < hist1.Length; i++)
         {
-            sum += Mathf.Sqrt(Mathf.Pow(hist1[i] - hist2[i], 2)); //Euclidian Distance
+            //Euclidian Distance
+            euclidian += Mathf.Pow(hist1[i] - hist2[i], 2);
         }
 
-        sum /= hist1.Length;
+        euclidian = Mathf.Sqrt((float)euclidian);
 
-        return sum;
+        return euclidian;
+    }
+
+    /* Calculate the Manhattan Distance between two histograms */
+    /* Result = number */
+    private double PdistCityBlock(int[] hist1, int[] hist2)
+    {
+        double manhattan = 0;
+
+        for (int i = 0; i < hist1.Length; i++)
+        {
+            //Manhattan or CityBlock distance
+            manhattan += Mathf.Abs(hist1[i] - hist2[i]);
+        }
+
+        return manhattan;
+    }
+
+    /* Calculate the Cosine Distance between two histograms (treated as vectors) */
+    /* Result = |1 - number| */
+    private double PdistCosine(int[] hist1, int[] hist2)
+    {
+        double sum_produto, sum_x, sum_y, resp;
+
+        sum_produto = 0;
+        sum_x = 0; sum_y = 0;
+
+        for (int i = 0; i < hist1.Length; i++)
+        {
+            sum_produto += hist1[i] * hist2[i];
+            sum_x += hist1[i] * hist1[i];
+            sum_y += hist2[i] * hist2[i];
+        }
+
+        resp = sum_produto / (Mathf.Sqrt((float)sum_x) * Mathf.Sqrt((float)sum_y));
+        resp = 1 - resp;
+
+        return Mathf.Abs(float.Parse(resp.ToString()));
     }
 
     //---------------- LBP METHODS --------------------
 
-    private int[] ExtractLBPFeatures(Texture2D pic) //Extract a vector of features from a image
+    /* Extract a histogram[256] of features from a given image */
+    private int[] ExtractLBPFeatures(Texture2D pic)
     {
         //PHASE 1 -> Conversion to Integers
         Color[] uni = pic.GetPixels();
@@ -137,7 +186,7 @@ public class Descriptors : MonoBehaviour
         {
             for (int j = 0; j < pic.width; j++)
             {
-                mat[i, j] = Mathf.RoundToInt(uni[count++].r * 255);
+                mat[i, j] = Mathf.RoundToInt(uni[count++].grayscale * 255);
             }
         }
 
@@ -173,8 +222,6 @@ public class Descriptors : MonoBehaviour
             }
         }
 
-        //pic_new => lbp transformed image
-
         ////////////////////////////////////////////
         //PHASE 3 -> Features Generation
         int[] features = new int[256];
@@ -184,7 +231,7 @@ public class Descriptors : MonoBehaviour
         {
             for (int j = 0; j < pic.width; j++)
             {
-                features[pic_new[i,j]] += 1;
+                features[pic_new[i, j]] += 1;
             }
         }
 
@@ -194,19 +241,24 @@ public class Descriptors : MonoBehaviour
 
     //---------------- PUBLIC METHODS --------------------
 
-    public double CompareImages(Texture2D img1, Texture2D img2) //Compare two images using LBP
+    /* Compare two images using the LBP method, with a given distance method */
+    /* Best options: Cosine > Euclidian > Cityblock */
+    public double CompareImages(Texture2D img1, Texture2D img2)
     {
-        Texture2D gray1, gray2;
         int[] features1, features2;
         double resp;
 
-        gray1 = ConvertToGrayscale(CutImage(img1));
-        features1 = ExtractLBPFeatures(gray1);
+        features1 = ExtractLBPFeatures(img1);
+        features2 = ExtractLBPFeatures(img2);
 
-        gray2 = ConvertToGrayscale(CutImage(img2));
-        features2 = ExtractLBPFeatures(gray2);
+        //resp = PdistEuclidian(features1, features2);
+        //Debug.Log("euclidian = " + resp);
 
-        resp = Pdist(features1, features2);
+        //resp = PdistCityBlock(features1, features2);
+        //Debug.Log("cityblock = " + resp);
+
+        resp = PdistCosine(features1, features2);
+        resp *= 10000;
 
         return resp;
     }

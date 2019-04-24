@@ -1,13 +1,13 @@
 Android
 PlayerPath?
-/Users/andrecreppe/Desktop/IC_Recognita/Builds/Recognita-v0.6.apk
+/Users/andrecreppe/Desktop/IC_Recognita/Builds/Recognita-v0.7.apk
 SceneListBegin?
 Assets/Scenes/Camera.unity
 Assets/Scenes/Info.unity
 Assets/Scenes/Tutorial.unity
 SceneListEnd?
 984dcc0ba3707b7691fbdca8ff508d28 Unity.TextMeshPro.dll:TMPro.TMP_SelectionCaret
-73a20a3643e17aaaa7be8d4e0f3421b7 Assembly-CSharp.dll:.CameraLanguage
+9bb036011e5471260781d8b9d1360b34 Assembly-CSharp.dll:.CameraLanguage
 01aa15e337e3a9c62f15153dfac6d589 Unity.TextMeshPro.dll:TMPro.TMP_Dropdown
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
 06f0fef534ca4c1d6064fd77a26bf722 UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationTrack
@@ -227,8 +227,8 @@ fb6a1ea36b4f6ef5948d283d93760765 UnityEngine.GoogleAudioSpatializer.dll:UnityEng
 5b0391b7e3d9ea9db6c0a8fbd0ca23f6 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSoundfieldExtension
 5b0391b7e3d9ea9db6c0a8fbd0ca23f6 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSourceExtension
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.Descriptors
-95c5eecd374a35baf82e75356ccff79a Assembly-CSharp.dll:.HelpLanguage
-a6a497374d930ef1cf397d67d0679502 Assembly-CSharp.dll:.CameraController
+734901ada74f4844e6d3ad106c80992b Assembly-CSharp.dll:.HelpLanguage
+9bd4ad7f4e9ffc09d86a3aae77ea3206 Assembly-CSharp.dll:.CameraController
 a4f0a4f62100f1a4fb5cbe0e00dde83f Unity.TextMeshPro.dll:TMPro.TextMeshProUGUI
 5fc094978ce3e3591a7500ed380d854a Unity.Analytics.DataPrivacy.dll:UnityEngine.Analytics.DataPrivacyButton
 d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver

@@ -85,20 +85,18 @@ public class Descriptors : MonoBehaviour
     /* Compare a 3x3 matrix to a certain element (binary comparison - 0 or 1) */
     private int[,] CompareToElement3x3(int[,] mat, int elem)
     {
-        int[,] neww = new int[3, 3];
-
         for (int i = 0; i < 3; i++)
         {
             for (int j = 0; j < 3; j++)
             {
                 if (mat[i, j] > elem)
-                    neww[i, j] = 1;
+                    mat[i, j] = 1;
                 else
-                    neww[i, j] = 0;
+                    mat[i, j] = 0;
             }
         }
 
-        return neww;
+        return mat;
     }
 
     /* Add all elements from one matrix */
@@ -154,7 +152,7 @@ public class Descriptors : MonoBehaviour
     /* Result = |1 - number| */
     private double PdistCosine(int[] hist1, int[] hist2)
     {
-        double sum_produto, sum_x, sum_y, resp;
+        float sum_produto, sum_x, sum_y, resp;
 
         sum_produto = 0;
         sum_x = 0; sum_y = 0;
@@ -166,10 +164,9 @@ public class Descriptors : MonoBehaviour
             sum_y += hist2[i] * hist2[i];
         }
 
-        resp = sum_produto / (Mathf.Sqrt((float)sum_x) * Mathf.Sqrt((float)sum_y));
-        resp = 1 - resp;
+        resp = sum_produto / (Mathf.Sqrt(sum_x) * Mathf.Sqrt(sum_y));
 
-        return Mathf.Abs(float.Parse(resp.ToString()));
+        return Mathf.Abs(1 - resp);
     }
 
     //---------------- LBP METHODS --------------------
@@ -192,6 +189,8 @@ public class Descriptors : MonoBehaviour
 
         ////////////////////////////////////////////
         //PHASE 2 -> Matrix Manipulation
+        int[] features = new int[256];
+            Array.Clear(features, 0, features.Length);
         int[,] pic_new = new int[pic.height, pic.width];
         int[,] mini_area = new int[3, 3];
         int[,] pesos = {
@@ -219,18 +218,9 @@ public class Descriptors : MonoBehaviour
                         CompareToElement3x3(mini_area, mini_area[1, 1]), pesos
                     ), 3, 3
                 );
-            }
-        }
 
-        ////////////////////////////////////////////
-        //PHASE 3 -> Features Generation
-        int[] features = new int[256];
-        Array.Clear(features, 0, features.Length);
-
-        for (int i = 0; i < pic.height; i++)
-        {
-            for (int j = 0; j < pic.width; j++)
-            {
+                ////////////////////////////////////////////
+                //PHASE 3 -> Features Generation
                 features[pic_new[i, j]] += 1;
             }
         }
@@ -252,13 +242,8 @@ public class Descriptors : MonoBehaviour
         features2 = ExtractLBPFeatures(img2);
 
         //resp = PdistEuclidian(features1, features2);
-        //Debug.Log("euclidian = " + resp);
-
         //resp = PdistCityBlock(features1, features2);
-        //Debug.Log("cityblock = " + resp);
-
-        resp = PdistCosine(features1, features2);
-        resp *= 10000;
+        resp = PdistCosine(features1, features2) * 10000;
 
         return resp;
     }

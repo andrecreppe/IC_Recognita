@@ -4,10 +4,8 @@
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="IC_Recognita" expanded="True">
-            <Node name="Assets" expanded="True">
-              <Node name="Scripts" expanded="True">
-                <Node name="CameraController.cs" selected="True" />
-              </Node>
+            <Node name="Assets" expanded="True" selected="True">
+              <Node name="Scripts" expanded="True" />
             </Node>
           </Node>
         </State>

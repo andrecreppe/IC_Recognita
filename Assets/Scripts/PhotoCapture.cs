@@ -74,17 +74,19 @@ public class PhotoCapture : MonoBehaviour
         returnButton.gameObject.SetActive(!returnButton.gameObject.activeSelf);
         trashButton.gameObject.SetActive(!trashButton.gameObject.activeSelf);
 
-        //Fix mobile rotation -> pewview object
-        ////In the mobile version, it is flipped to the left
-        ////Invert if picture is taken with back camera
+        //Reset Rotation
+        rot = Quaternion.Euler(0, 0, 0);
+        preview.gameObject.transform.rotation = rot;
+
+        //Fix mobile rotation
         if ((tx == pic1) && pic1_isBack)
         {
-            rot = Quaternion.Euler(0, 0, -90);
+            rot = Quaternion.Euler(0, 0, 180);
             preview.gameObject.transform.rotation = rot;
         }
         else if ((tx == pic2) && pic2_isBack)
         {
-            rot = Quaternion.Euler(0, 0, -90);
+            rot = Quaternion.Euler(0, 0, 180);
             preview.gameObject.transform.rotation = rot;
         }
         else

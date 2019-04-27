@@ -80,9 +80,9 @@ public class ImageProcessing : MonoBehaviour
         
         resp = dec.CompareImages(img1, img2);
 
-        ShowResults(resp, dec.LBP_treshold);
-
         photcap.DeletePictures();
+
+        ShowResults(resp, dec.LBP_treshold);
     }
 
     /* Close the results tab */

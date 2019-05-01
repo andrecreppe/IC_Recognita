@@ -14,11 +14,13 @@ public class CameraController : MonoBehaviour
     public Text errorMsg;
     public Button snapButton, reloadButton;
 
+    private Lang_Camera camlang;
+
     //---------------- PRIVATE METHODS --------------------
 
     private void Awake()
     {
-        CameraLanguage camlang = FindObjectOfType<CameraLanguage>();
+        camlang = FindObjectOfType<Lang_Camera>();
 
         camlang.CameraError(2);
         reloadButton.gameObject.SetActive(true);
@@ -27,8 +29,6 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
-        CameraLanguage camlang = FindObjectOfType<CameraLanguage>();
-
         //Setup Enviroment
         defaultBackground = background.texture;
 
@@ -101,8 +101,6 @@ public class CameraController : MonoBehaviour
     //Test if camera is working (start error or not)
     private void TestCamera()
     {
-        CameraLanguage camlang = FindObjectOfType<CameraLanguage>();
-
         if(activeCamera == null)
         {
             background.texture = defaultBackground;

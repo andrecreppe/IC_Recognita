@@ -12,9 +12,18 @@ public class PhotoCapture : MonoBehaviour
     public GameObject but1, but2;
     public Button snapButton, returnButton, trashButton;
     public Text snapText;
-    public RawImage preview;    
+    public RawImage preview;
+
+    private CameraController camcon;
+    private ImageProcessing imgprocess;
 
     //---------------- PRIVATE METHODS ----------------
+
+    private void Awake()
+    {
+        camcon = FindObjectOfType<CameraController>();
+        imgprocess = FindObjectOfType<ImageProcessing>();
+    }
 
     private void Start()
     {
@@ -102,9 +111,6 @@ public class PhotoCapture : MonoBehaviour
     /* After both beeing taken, send to analysis */
     public void DoSnap()
     {
-        CameraController camcon = FindObjectOfType<CameraController>();
-        ImageProcessing imgprocess = FindObjectOfType<ImageProcessing>();
-
         if (count == 0) //Not 1 - Not 2
         {
             pic1 = camcon.GetCamImage();
@@ -154,7 +160,6 @@ public class PhotoCapture : MonoBehaviour
     /* Show image 1 */
     public void RevealPic1()
     {
-        CameraController camcon = FindObjectOfType<CameraController>();
         camcon.ChangeCameraStatus(); //Stop camera processing
 
         TogglePreview(pic1);
@@ -164,7 +169,6 @@ public class PhotoCapture : MonoBehaviour
     /* Show image 2 */
     public void RevealPic2()
     {
-        CameraController camcon = FindObjectOfType<CameraController>();
         camcon.ChangeCameraStatus(); //Stop camera processing
 
         TogglePreview(pic2);
@@ -200,7 +204,6 @@ public class PhotoCapture : MonoBehaviour
     /* Close the preview window */
     public void ClosePreview()
     {
-        CameraController camcon = FindObjectOfType<CameraController>();
         camcon.ChangeCameraStatus(); //Start again the camera
 
         //Preview = OFF
@@ -208,7 +211,7 @@ public class PhotoCapture : MonoBehaviour
 
         if (pic1_show)
             pic1_show = false;
-        else
+        else if (pic2_show)
             pic2_show = false;
     }
 

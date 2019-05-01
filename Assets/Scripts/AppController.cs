@@ -20,38 +20,46 @@ public class AppController : MonoBehaviour
                 PlayerPrefs.SetInt(langKey, 2); //Default = english
 
             PlayerPrefs.Save();
-
-            Debug.Log("default system lang = " + PlayerPrefs.GetInt(langKey));
-        }
-
-        //Is the first time -> load tutorial
-        string begginKey = "first";
-
-        if (PlayerPrefs.GetInt(begginKey) != 1)
-        {
-            //Set flag to complete
-            PlayerPrefs.SetInt(begginKey, 1);
-            PlayerPrefs.Save();
-
-            //Reload scene
-            SceneManager.LoadScene("Tutorial");
         }
     }
 
     //-------------- PUBLIC METHODS (Scene Loaders) ---------------
 
-    public void LoadInfo()
+    //General loaders
+    public void LoadMenu()
     {
-        SceneManager.LoadScene("Info");
+        SceneManager.LoadScene("Menu");
     }
 
-    public void LoadCamera()
+    public void LoadConfigs()
     {
-        SceneManager.LoadScene("Camera");
+        SceneManager.LoadScene("Configs");
     }
 
-    public void LoadTutorial()
+    public void LoadAbout()
     {
-        SceneManager.LoadScene("Tutorial");
+        SceneManager.LoadScene("About");
+    }
+
+    //Authenticator loaders
+    public void LoadAuthenticator()
+    {
+        SceneManager.LoadScene("Authenticator");
+    }
+
+    public void LoadAuthTutorial()
+    {
+        SceneManager.LoadScene("AuthTutorial");
+    }
+
+    //ComparatorLoaders
+    public void LoadComparison()
+    {
+        SceneManager.LoadScene("Comparison");
+    }
+
+    public void LoadCompTutorial()
+    {
+        SceneManager.LoadScene("CompTutorial");
     }
 }

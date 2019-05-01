@@ -1,13 +1,15 @@
 Android
 PlayerPath?
-/Users/andrecreppe/Desktop/IC_Recognita/Builds/Recognita-v0.8.apk
+/Users/andrecreppe/Desktop/IC_Recognita/Builds/Recognita-v0.9.apk
 SceneListBegin?
-Assets/Scenes/Camera.unity
-Assets/Scenes/Info.unity
-Assets/Scenes/Tutorial.unity
+Assets/Scenes/Menu.unity
+Assets/Scenes/Configs.unity
+Assets/Scenes/About.unity
+Assets/Scenes/CompTutorial.unity
+Assets/Scenes/Comparison.unity
 SceneListEnd?
 984dcc0ba3707b7691fbdca8ff508d28 Unity.TextMeshPro.dll:TMPro.TMP_SelectionCaret
-9bb036011e5471260781d8b9d1360b34 Assembly-CSharp.dll:.CameraLanguage
+9bb036011e5471260781d8b9d1360b34 Assembly-CSharp.dll:.Lang_Camera
 01aa15e337e3a9c62f15153dfac6d589 Unity.TextMeshPro.dll:TMPro.TMP_Dropdown
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
 06f0fef534ca4c1d6064fd77a26bf722 UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationTrack
@@ -87,7 +89,7 @@ fc108ce7d98c40ac0907e8ca7f500c76 UnityEngine.UI.dll:UnityEngine.UI.Text
 0fd6822f6177297bd0eb4d83cc7a9030 UnityEngine.UI.dll:UnityEngine.UI.ToggleGroup
 abf1930d8126d0b2e00e9449129a0190 UnityEngine.UI.dll:UnityEngine.EventSystems.TouchInputModule
 64e54c0cbb0177c5ea26f340efb9ff85 UnityEngine.UI.dll:UnityEngine.UI.VerticalLayoutGroup
-6230c0e2fe2cfc6dee3bdf2a72475779 Assembly-CSharp.dll:.InfoLanguage
+ceb597bfc625d6627c9b3c7507cd8873 Assembly-CSharp.dll:.Lang_Info
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
 06f0fef534ca4c1d6064fd77a26bf722 UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationTrack
 780e8f682b3221346c034a6712a0fd25 UnityEngine.Timeline.dll:UnityEngine.Timeline.AnimationPlayableAsset
@@ -227,7 +229,7 @@ fb6a1ea36b4f6ef5948d283d93760765 UnityEngine.GoogleAudioSpatializer.dll:UnityEng
 5b0391b7e3d9ea9db6c0a8fbd0ca23f6 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSoundfieldExtension
 5b0391b7e3d9ea9db6c0a8fbd0ca23f6 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSourceExtension
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.Descriptors
-734901ada74f4844e6d3ad106c80992b Assembly-CSharp.dll:.HelpLanguage
+65e6404f886897c4c0186d2b12b98e81 Assembly-CSharp.dll:.Lang_Help
 9bd4ad7f4e9ffc09d86a3aae77ea3206 Assembly-CSharp.dll:.CameraController
 a4f0a4f62100f1a4fb5cbe0e00dde83f Unity.TextMeshPro.dll:TMPro.TextMeshProUGUI
 5fc094978ce3e3591a7500ed380d854a Unity.Analytics.DataPrivacy.dll:UnityEngine.Analytics.DataPrivacyButton
@@ -307,3 +309,5 @@ cd67f3e1e9ccac6db86c1564cea5a827 Vuforia.UnityExtensions.dll:Vuforia.VuforiaConf
 69167579cf7fcbb2676fc1e675963dcd Vuforia.UnityExtensions.dll:Vuforia.VuMarkBehaviour
 fbbf64dcbe0662e3eda1dec45ea8f895 Vuforia.UnityExtensions.dll:Vuforia.WireframeBehaviour
 71bb6a6b6c8f052f948db64c7dd3ca4f Vuforia.UnityExtensions.dll:Vuforia.WireframeTrackableEventHandler
+3dff48c5e1a9a4abdce27814fb3b2706 Assembly-CSharp.dll:.Lang_Menu
+47c6c2d7dfe1b406d4b91c8bc046abc5 Assembly-CSharp.dll:.Lang_Configs

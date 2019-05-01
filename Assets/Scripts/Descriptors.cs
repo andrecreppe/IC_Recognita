@@ -5,7 +5,9 @@ public class Descriptors : MonoBehaviour
 {
     //---------------- VARIABLES --------------------
 
-    public readonly double LBP_treshold = 62.4;
+    public readonly double COSSINE_treshold = 62.4; //already x100
+    //public readonly double EUCLIDIAN_treshold = 0.0;
+    //public readonly double CITYBLOCK_treshold = 0.0;
 
     //---------------- PREPARATION METHODS --------------------
 
@@ -190,7 +192,7 @@ public class Descriptors : MonoBehaviour
         ////////////////////////////////////////////
         //PHASE 2 -> Matrix Manipulation
         int[] features = new int[256];
-            Array.Clear(features, 0, features.Length);
+        Array.Clear(features, 0, features.Length);
         int[,] pic_new = new int[pic.height, pic.width];
         int[,] mini_area = new int[3, 3];
         int[,] pesos = {
@@ -243,7 +245,7 @@ public class Descriptors : MonoBehaviour
 
         //resp = PdistEuclidian(features1, features2);
         //resp = PdistCityBlock(features1, features2);
-        resp = PdistCosine(features1, features2) * 10000;
+        resp = PdistCosine(features1, features2) * 100;
 
         return resp;
     }

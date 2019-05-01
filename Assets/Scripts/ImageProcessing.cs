@@ -11,13 +11,20 @@ public class ImageProcessing : MonoBehaviour
     public bool saveData;
     public Image result_menu;
 
+    private CameraController camcon;
+    private Lang_Camera camlang;
+
     //---------------- PRIVATE METHODS -------------------
+
+    private void Awake()
+    {
+        camcon = FindObjectOfType<CameraController>();
+        camlang = FindObjectOfType<Lang_Camera>();
+    }
 
     /* Display the result panel with the comparison result */
     private void ShowResults(double resp, double treshold)
     {
-        CameraController camcon = FindObjectOfType<CameraController>();
-        CameraLanguage camlang = FindObjectOfType<CameraLanguage>();
         bool thesame;
 
         //Set the Result Display active
@@ -30,14 +37,14 @@ public class ImageProcessing : MonoBehaviour
             camlang.Result(resp, true);
         else //Different Images
             camlang.Result(resp, false);
-        
+
         //SaveResult(resp, perc, thesame);
     }
 
     /* Save the results as a log */
     private void SaveResult(double resp, double perc, bool equal)
     {
-        if(saveData)
+        if (saveData)
         {
             BinaryFormatter bf = new BinaryFormatter();
             FileStream fs;
@@ -47,7 +54,7 @@ public class ImageProcessing : MonoBehaviour
             log = "";
 
             //Check if a file exists
-            if (File.Exists(path)) 
+            if (File.Exists(path))
             {
                 //Load file
                 fs = File.Open(path, FileMode.Open);
@@ -76,20 +83,19 @@ public class ImageProcessing : MonoBehaviour
     {
         Descriptors dec = FindObjectOfType<Descriptors>();
         PhotoCapture photcap = FindObjectOfType<PhotoCapture>();
-        double resp; 
-        
+        double resp, tresh;
+
         resp = dec.CompareImages(img1, img2);
 
         photcap.DeletePictures();
 
-        ShowResults(resp, dec.LBP_treshold);
+        tresh = dec.COSSINE_treshold;
+        ShowResults(resp, tresh);
     }
 
     /* Close the results tab */
     public void CloseResults()
     {
-        CameraController camcon = FindObjectOfType<CameraController>();
-
         result_menu.gameObject.SetActive(!result_menu.gameObject.activeSelf);
         camcon.ChangeCameraStatus();
     }

@@ -64,9 +64,9 @@
     <Compile Include="Assets\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\Descriptors.cs" />
     <Compile Include="Assets\Scripts\ImageProcessing.cs" />
-    <Compile Include="Assets\Scripts\Lang_Camera.cs" />
+    <Compile Include="Assets\Scripts\Lang_Comp.cs" />
     <Compile Include="Assets\Scripts\Lang_Configs.cs" />
-    <Compile Include="Assets\Scripts\Lang_Help.cs" />
+    <Compile Include="Assets\Scripts\Lang_HelpComp.cs" />
     <Compile Include="Assets\Scripts\Lang_Info.cs" />
     <Compile Include="Assets\Scripts\Lang_Menu.cs" />
     <Compile Include="Assets\Scripts\PhotoCapture.cs" />

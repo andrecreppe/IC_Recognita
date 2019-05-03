@@ -12,14 +12,14 @@ public class ImageProcessing : MonoBehaviour
     public Image result_menu;
 
     private CameraController camcon;
-    private Lang_Camera camlang;
+    private Lang_Comp camlang;
 
     //---------------- PRIVATE METHODS -------------------
 
     private void Awake()
     {
         camcon = FindObjectOfType<CameraController>();
-        camlang = FindObjectOfType<Lang_Camera>();
+        camlang = FindObjectOfType<Lang_Comp>();
     }
 
     /* Display the result panel with the comparison result */

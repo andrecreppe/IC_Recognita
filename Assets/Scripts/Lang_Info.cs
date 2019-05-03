@@ -106,10 +106,8 @@ public class Lang_Info : MonoBehaviour
         }
     }
 
-    //------------------ PUBLIC METHODS --------------------
-
     /* Change the language according to the flag order */
-    public void UpdateLanguage()
+    private void UpdateLanguage()
     {
         switch (count)
         {
@@ -157,6 +155,8 @@ public class Lang_Info : MonoBehaviour
                 break;
         }
     }
+
+    //------------------ PUBLIC METHODS --------------------
 
     /* Flip 'Andre' content state */
     public void ContactAndre()

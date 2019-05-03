@@ -5,9 +5,10 @@ public class Descriptors : MonoBehaviour
 {
     //---------------- VARIABLES --------------------
 
-    public readonly double COSSINE_treshold = 62.4; //already x100
+    public readonly double COSSINE_treshold = 62.4; //already x1000
     //public readonly double EUCLIDIAN_treshold = 0.0;
     //public readonly double CITYBLOCK_treshold = 0.0;
+    public int selected_comparator; 
 
     //---------------- PREPARATION METHODS --------------------
 
@@ -230,6 +231,12 @@ public class Descriptors : MonoBehaviour
         return features;
     }
 
+    //---------------- PRIVATE METHODS --------------------
+
+    private void Start() //TEMPORÁRIOOOOOOOOAKDJALKSDJLKAJSDLKAJDSLASD
+    {
+        selected_comparator = 1;
+    }
 
     //---------------- PUBLIC METHODS --------------------
 
@@ -245,8 +252,14 @@ public class Descriptors : MonoBehaviour
 
         //resp = PdistEuclidian(features1, features2);
         //resp = PdistCityBlock(features1, features2);
-        resp = PdistCosine(features1, features2) * 100;
+        resp = PdistCosine(features1, features2) * 1000;
+            //selected_comparator = 1;
 
         return resp;
+    }
+
+    public int GetDescriptorInUse()
+    {
+        return selected_comparator;
     }
 }

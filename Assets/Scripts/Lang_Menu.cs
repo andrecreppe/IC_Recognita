@@ -21,10 +21,8 @@ public class Lang_Menu : MonoBehaviour
         UpdateLanguage();
     }
 
-    //------------------ PUBLIC METHODS --------------------
-
     /* Change the language according to flag order */
-    public void UpdateLanguage()
+    private void UpdateLanguage()
     {
         switch (count)
         {

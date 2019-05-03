@@ -14,13 +14,13 @@ public class CameraController : MonoBehaviour
     public Text errorMsg;
     public Button snapButton, reloadButton;
 
-    private Lang_Camera camlang;
+    private Lang_Comp camlang;
 
     //---------------- PRIVATE METHODS --------------------
 
     private void Awake()
     {
-        camlang = FindObjectOfType<Lang_Camera>();
+        camlang = FindObjectOfType<Lang_Comp>();
 
         camlang.CameraError(2);
         reloadButton.gameObject.SetActive(true);

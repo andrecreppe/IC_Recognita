@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+#if PLATFORM_ANDROID
+    using UnityEngine.Android;
+#endif
 
 public class AppController : MonoBehaviour
 {
@@ -21,6 +24,15 @@ public class AppController : MonoBehaviour
 
             PlayerPrefs.Save();
         }
+    }
+
+    private void Start()
+    {
+        //Allow camera for android devices
+        #if PLATFORM_ANDROID
+            if (!Permission.HasUserAuthorizedPermission(Permission.Camera))
+                Permission.RequestUserPermission(Permission.Camera);
+        #endif
     }
 
     //-------------- PUBLIC METHODS (Scene Loaders) ---------------
@@ -52,7 +64,7 @@ public class AppController : MonoBehaviour
         SceneManager.LoadScene("AuthTutorial");
     }
 
-    //ComparatorLoaders
+    //Comparator Loaders
     public void LoadComparison()
     {
         SceneManager.LoadScene("Comparison");

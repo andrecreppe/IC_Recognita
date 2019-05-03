@@ -1,7 +1,8 @@
 ﻿<Properties StartupConfiguration="{8584B326-16EA-5EBB-70CD-2669415A1C13}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Lang_Menu.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Lang_HelpComp.cs">
     <Files>
-      <File FileName="Assets/Scripts/Lang_Menu.cs" Line="16" Column="6" />
+      <File FileName="Assets/Scripts/Lang_HelpComp.cs" Line="34" Column="1" />
+      <File FileName="Assets/Scripts/Descriptors.cs" Line="256" Column="15" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -9,7 +10,7 @@
           <Node name="IC_Recognita" expanded="True">
             <Node name="Assets" expanded="True">
               <Node name="Scripts" expanded="True">
-                <Node name="Lang_Menu.cs" selected="True" />
+                <Node name="Lang_HelpComp.cs" selected="True" />
               </Node>
             </Node>
           </Node>
@@ -19,7 +20,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="4cf193ee-2638-4e58-8987-c84dfff52d5c" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="0449d544-eb36-4d00-be4b-a4bd94f5e912" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

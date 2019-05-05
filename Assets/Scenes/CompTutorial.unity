@@ -570,7 +570,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Wie lesen des '
+  m_Text: 'Como capturar a face:'
 --- !u!222 &418619912
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1018,10 +1018,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "- The value <b>Pdist</b> after the\nrecognition represents the \ndistance
-    between the two \nimages;\n\n- Lower values represent a\nbigger similarity;\n\n-
-    The selected descriptor\n<b>(Cossine)</b> represents the \nvectorial distance
-    between\nthe image pixels."
+  m_Text: "1) Align your face with the \n\tred border;\n\n2) Press the button \"Snap!\";\n\n2.1)
+    If the image get bad,\n\tclick in the lower corner\n\tto visualize it and you\n\tcan
+    delete it;\n\n3) After capturing both\n\timages, press \"Go\" and\n\twait for
+    the result!"
 --- !u!222 &1005425817
 CanvasRenderer:
   m_ObjectHideFlags: 0

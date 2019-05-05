@@ -33,7 +33,7 @@ public class Lang_HelpComp : MonoBehaviour
 
         switch(descr.GetDescriptorInUse())
         {
-            case 1: //Cossine
+            case 3: //Cossine
                 switch(count)
                 {
                     case 1:
@@ -55,7 +55,9 @@ public class Lang_HelpComp : MonoBehaviour
 
                     //Deutsch
                     case 3:
-                        resp += "";
+                        resp += "- Der ausgewählte Deskriptor " +
+                        	"\n<b>(Cossine)</b> stellt die vektoriell " +
+                        	"\nAbstand zwischen die \nBildpunkte.";
 
                         break;
                 }
@@ -83,7 +85,7 @@ public class Lang_HelpComp : MonoBehaviour
                 }
                 break;
 
-            case 3: //Cityblock
+            case 1: //Cityblock
                 switch (count)
                 {
                     case 1:
@@ -227,7 +229,12 @@ public class Lang_HelpComp : MonoBehaviour
             case 3:
                 howTo.text = "Wie das Ergebnis liest";
 
-                steps.text = "" +
+                steps.text = "- Der Wert Pdist nach der " +
+                	"\nErkennung stellt den " +
+                	"\nAbstand zwischen den " +
+                	"\nbeiden Bildern dar;" +
+                	"\n\n- Niedrigere Werte stellen " +
+                	"\neine größere Ähnlichkeit dar;" +
                 	"\n\n" + DescriptorInfo();
 
                 capture.text = "Aufnehmen";

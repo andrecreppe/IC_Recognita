@@ -13,6 +13,8 @@ public class ImageProcessing : MonoBehaviour
 
     private CameraController camcon;
     private Lang_Comp camlang;
+    private Descriptors dec;
+    private PhotoCapture photcap;
 
     //---------------- PRIVATE METHODS -------------------
 
@@ -20,6 +22,8 @@ public class ImageProcessing : MonoBehaviour
     {
         camcon = FindObjectOfType<CameraController>();
         camlang = FindObjectOfType<Lang_Comp>();
+        dec = FindObjectOfType<Descriptors>();
+        photcap = FindObjectOfType<PhotoCapture>();
     }
 
     /* Display the result panel with the comparison result */
@@ -81,15 +85,13 @@ public class ImageProcessing : MonoBehaviour
     /* Manage the recognition calling -> Execute the comparison order */
     public void Recognition(Texture2D img1, Texture2D img2)
     {
-        Descriptors dec = FindObjectOfType<Descriptors>();
-        PhotoCapture photcap = FindObjectOfType<PhotoCapture>();
         double resp, tresh;
 
         resp = dec.CompareImages(img1, img2);
+        tresh = dec.ActiveTreshold();
 
         photcap.DeletePictures();
 
-        tresh = dec.COSSINE_treshold;
         ShowResults(resp, tresh);
     }
 

@@ -5,10 +5,12 @@ public class Descriptors : MonoBehaviour
 {
     //---------------- VARIABLES --------------------
 
-    public readonly double COSSINE_treshold = 62.4; //already x1000
-    //public readonly double EUCLIDIAN_treshold = 0.0;
-    //public readonly double CITYBLOCK_treshold = 0.0;
-    public int selected_comparator; 
+    private readonly double COSSINE_treshold = 62.4; //already x1000
+    private readonly double EUCLIDIAN_treshold = 0.0;
+    private readonly double CITYBLOCK_treshold = 0.0;
+
+    private int selected_comparator;
+    private string compKey;
 
     //---------------- PREPARATION METHODS --------------------
 
@@ -233,9 +235,21 @@ public class Descriptors : MonoBehaviour
 
     //---------------- PRIVATE METHODS --------------------
 
-    private void Start() //TEMPORÁRIOOOOOOOOAKDJALKSDJLKAJSDLKAJDSLASD
+    private void Start()
     {
-        selected_comparator = 1;
+        compKey = "descriptor";
+
+        if(!PlayerPrefs.HasKey(compKey)) //First time
+        {
+            PlayerPrefs.SetInt(compKey, 3); //Cossine = default
+            PlayerPrefs.Save();
+
+            selected_comparator = 3;
+        }
+        else
+        {
+            selected_comparator = PlayerPrefs.GetInt(compKey);
+        }
     }
 
     //---------------- PUBLIC METHODS --------------------
@@ -245,19 +259,53 @@ public class Descriptors : MonoBehaviour
     public double CompareImages(Texture2D img1, Texture2D img2)
     {
         int[] features1, features2;
-        double resp;
+        double resp = -1;
 
         features1 = ExtractLBPFeatures(img1);
         features2 = ExtractLBPFeatures(img2);
 
-        //resp = PdistEuclidian(features1, features2);
-        //resp = PdistCityBlock(features1, features2);
-        resp = PdistCosine(features1, features2) * 1000;
-            //selected_comparator = 1;
+        switch(selected_comparator)
+        {
+            case 1:
+                resp = PdistCityBlock(features1, features2);
+                break;
+            case 2:
+                resp = PdistEuclidian(features1, features2);
+                break;
+            case 3:
+                resp = PdistCosine(features1, features2) * 10000;
+                break;
+        }
 
         return resp;
     }
 
+    /* Get the treshold for the comparator in use */
+    public double ActiveTreshold()
+    {
+        double tresh = 0;
+
+        switch (selected_comparator)
+        {
+            case 1:
+                tresh = CITYBLOCK_treshold;
+                break;
+            case 2:
+                tresh = EUCLIDIAN_treshold;
+                break;
+            case 3:
+                tresh = COSSINE_treshold;
+                break;
+        }
+
+        return tresh;
+    }
+
+    /* Selected comparator numeric representent */
+    public void SetDescriptorInUse(int desc)
+    {
+        selected_comparator = desc;
+    }
     public int GetDescriptorInUse()
     {
         return selected_comparator;

@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
+//ARRUMAR OS CAMERAERROR(int) -> DEPENDEM DO CAMERALANG
 
 public class CameraController : MonoBehaviour
 {
@@ -14,15 +17,22 @@ public class CameraController : MonoBehaviour
     public Text errorMsg;
     public Button snapButton, reloadButton;
 
-    private Lang_Comp camlang;
+    private Lang_Comp camcomplang;
 
     //---------------- PRIVATE METHODS --------------------
 
     private void Awake()
     {
-        camlang = FindObjectOfType<Lang_Comp>();
+        if(SceneManager.GetActiveScene().name == "Comparison")
+        {
+            camcomplang = FindObjectOfType<Lang_Comp>();
+            camcomplang.CameraError(2);
+        }
+        else
+        {
+            //outro lang
+        }
 
-        camlang.CameraError(2);
         reloadButton.gameObject.SetActive(true);
         reloadButton.transform.SetAsLastSibling();
     }
@@ -37,8 +47,16 @@ public class CameraController : MonoBehaviour
         //No camera detection
         if(devices.Length == 0)
         {
-            camlang.CameraError(1);
-            
+            if (SceneManager.GetActiveScene().name == "Comparison")
+            {
+                camcomplang = FindObjectOfType<Lang_Comp>();
+                camcomplang.CameraError(1);
+            }
+            else
+            {
+                //outro lang
+            }
+
             camAvailable = false;
             return;
         }
@@ -107,7 +125,15 @@ public class CameraController : MonoBehaviour
 
             camAvailable = false;
 
-            camlang.CameraError(2);
+            if (SceneManager.GetActiveScene().name == "Comparison")
+            {
+                camcomplang = FindObjectOfType<Lang_Comp>();
+                camcomplang.CameraError(2);
+            }
+            else
+            {
+                //outro lang
+            }
 
             snapButton.gameObject.SetActive(false);
             reloadButton.gameObject.SetActive(true);
@@ -120,7 +146,15 @@ public class CameraController : MonoBehaviour
 
             camAvailable = true;
 
-            camlang.CameraError(0);
+            if (SceneManager.GetActiveScene().name == "Comparison")
+            {
+                camcomplang = FindObjectOfType<Lang_Comp>();
+                camcomplang.CameraError(0);
+            }
+            else
+            {
+                //outro lang
+            }
 
             snapButton.gameObject.SetActive(true);
             reloadButton.gameObject.SetActive(false);

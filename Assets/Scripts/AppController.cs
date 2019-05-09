@@ -10,7 +10,7 @@ public class AppController : MonoBehaviour
 
     private void Awake()
     {
-        //Detect system language -> first time
+        //Detect system language -> first log
         string langKey = "lang";
 
         if (PlayerPrefs.GetInt(langKey) > 3 || PlayerPrefs.GetInt(langKey) < 1)
@@ -57,6 +57,11 @@ public class AppController : MonoBehaviour
     public void LoadAuthenticator()
     {
         SceneManager.LoadScene("Authenticator");
+    }
+
+    public void LoadAuthRegister()
+    {
+        SceneManager.LoadScene("AuthRegister");
     }
 
     public void LoadAuthTutorial()

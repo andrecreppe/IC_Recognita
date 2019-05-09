@@ -177,7 +177,7 @@ public class Descriptors : MonoBehaviour
     //---------------- LBP METHODS --------------------
 
     /* Extract a histogram[256] of features from a given image */
-    private int[] ExtractLBPFeatures(Texture2D pic)
+    public int[] ExtractLBPFeatures(Texture2D pic)
     {
         //PHASE 1 -> Conversion to Integers
         Color[] uni = pic.GetPixels();

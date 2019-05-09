@@ -14,7 +14,7 @@ public class ImageProcessing : MonoBehaviour
     private CameraController camcon;
     private Lang_Comp camlang;
     private Descriptors dec;
-    private PhotoCapture photcap;
+    private PhotoCapture_Comp photcapcomp;
 
     //---------------- PRIVATE METHODS -------------------
 
@@ -23,7 +23,7 @@ public class ImageProcessing : MonoBehaviour
         camcon = FindObjectOfType<CameraController>();
         camlang = FindObjectOfType<Lang_Comp>();
         dec = FindObjectOfType<Descriptors>();
-        photcap = FindObjectOfType<PhotoCapture>();
+        photcapcomp = FindObjectOfType<PhotoCapture_Comp>();
     }
 
     /* Display the result panel with the comparison result */
@@ -90,7 +90,7 @@ public class ImageProcessing : MonoBehaviour
         resp = dec.CompareImages(img1, img2);
         tresh = dec.ActiveTreshold();
 
-        photcap.DeletePictures();
+        photcapcomp.DeletePictures();
 
         ShowResults(resp, tresh);
     }

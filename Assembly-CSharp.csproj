@@ -69,7 +69,8 @@
     <Compile Include="Assets\Scripts\Lang_HelpComp.cs" />
     <Compile Include="Assets\Scripts\Lang_Info.cs" />
     <Compile Include="Assets\Scripts\Lang_Menu.cs" />
-    <Compile Include="Assets\Scripts\PhotoCapture.cs" />
+    <Compile Include="Assets\Scripts\PhotoCapture_Auth.cs" />
+    <Compile Include="Assets\Scripts\PhotoCapture_Comp.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>/Users/andrecreppe/Desktop/IC_Recognita/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>

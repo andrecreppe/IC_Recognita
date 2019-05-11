@@ -15,14 +15,14 @@ public class PhotoCapture_Comp : MonoBehaviour
     public RawImage preview;
 
     private CameraController camcon;
-    private ImageProcessing imgprocess;
+    private ImgProcessing_Comp imgprocess;
 
     //---------------- PRIVATE METHODS ----------------
 
     private void Awake()
     {
         camcon = FindObjectOfType<CameraController>();
-        imgprocess = FindObjectOfType<ImageProcessing>();
+        imgprocess = FindObjectOfType<ImgProcessing_Comp>();
     }
 
     private void Start()

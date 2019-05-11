@@ -279,6 +279,25 @@ public class Descriptors : MonoBehaviour
 
         return resp;
     }
+    public double CompareImages(int[] features1, int[] features2)
+    {
+        double resp = -1;
+
+        switch (selected_comparator)
+        {
+            case 1:
+                resp = PdistCityBlock(features1, features2);
+                break;
+            case 2:
+                resp = PdistEuclidian(features1, features2);
+                break;
+            case 3:
+                resp = PdistCosine(features1, features2) * 10000;
+                break;
+        }
+
+        return resp;
+    }
 
     /* Get the treshold for the comparator in use */
     public double ActiveTreshold()

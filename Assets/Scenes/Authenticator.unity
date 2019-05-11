@@ -192,7 +192,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2062123626}
-        m_MethodName: DoSnap
+        m_MethodName: DoSnapAuthenticator
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2125,6 +2125,8 @@ GameObject:
   - component: {fileID: 2062123625}
   - component: {fileID: 2062123626}
   - component: {fileID: 2062123627}
+  - component: {fileID: 2062123628}
+  - component: {fileID: 2062123629}
   m_Layer: 0
   m_Name: Controller
   m_TagString: Untagged
@@ -2181,5 +2183,31 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7dff113ba7b374caf9d7d74c68f04bf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2062123628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2062123623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7125e608e69634078878f62dd951a1c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  errorTxt: {fileID: 568065480}
+  reloadTxt: {fileID: 1505179024}
+--- !u!114 &2062123629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2062123623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 718fbf48009ac4ff1b0c3c8f01e8959f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

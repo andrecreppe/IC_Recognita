@@ -5,47 +5,73 @@ public class PhotoCapture_Auth : MonoBehaviour
 {
     //------------------ VARIABLES --------------------
 
-    private Texture2D image;
+    private int count;
+    private Texture2D pic1, pic2, pic3;
     public Text snapText;
 
+    private AppController appcontrl;
     private CameraController camcon;
-    private ImageProcessing imgprocess;
+    private ImgProcessing_Auth imgprocauth;
+    private Lang_AuthReg langauthreg;
 
     //---------------- PRIVATE METHODS ----------------
 
     private void Awake()
     {
+        appcontrl = FindObjectOfType<AppController>();
         camcon = FindObjectOfType<CameraController>();
-        imgprocess = FindObjectOfType<ImageProcessing>();
+        imgprocauth = FindObjectOfType<ImgProcessing_Auth>();
+        langauthreg = FindObjectOfType<Lang_AuthReg>();
+            langauthreg.UpdateSnapText(count);
+    }
+
+    private void Start()
+    {
+        count = 0;
     }
 
     //---------------- PUBLIC METHODS -----------------
 
     /* Record one frame */
     /* After beeing taken, send to analysis */
-    public void DoSnap()
+    public void DoSnapRecord()
     {
-        image = camcon.GetCamImage();
+        switch (count)
+        {
+            case 0:
+                pic1 = camcon.GetCamImage();
 
-        Descriptors desc = FindObjectOfType<Descriptors>();
-        int[] teste = desc.ExtractLBPFeatures(image);
+                break;
+            case 1:
+                pic2 = camcon.GetCamImage();
 
+                break;
+            case 2:
+                pic3 = camcon.GetCamImage();
 
+                break;
+            default:
+                imgprocauth.SavePerson(pic1, pic2, pic3);
 
-        Debug.Log("teste.length = " + teste[1]);
-        //imgprocess.Recognition(pic1, pic2);
+                pic1 = null;
+                pic2 = null;
+                pic3 = null;
 
-        image = null;
+                appcontrl.LoadAuthenticator();
+
+                break;
+        }
+
+        langauthreg.UpdateSnapText(count);
+        count++;
     }
 
-    public void Teste() //FAZER ISSO PRA SALVAR
+    public void DoSnapAuthenticator()
     {
-        int count = 0;
-        string featuresKey = "features";
+        pic1 = camcon.GetCamImage();
 
-        for(int i=0; i<256; i++)
-        {
-            PlayerPrefs.SetInt(featuresKey, count);
-        }
+        imgprocauth.TryToUnlock(pic1);
+
+        pic1 = null;
     }
 }

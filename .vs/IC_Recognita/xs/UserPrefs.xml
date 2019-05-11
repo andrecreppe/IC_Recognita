@@ -1,18 +1,12 @@
 ﻿<Properties StartupConfiguration="{8584B326-16EA-5EBB-70CD-2669415A1C13}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/PhotoCapture_Auth.cs">
-    <Files>
-      <File FileName="Assets/Scripts/CameraController.cs" Line="5" Column="56" />
-      <File FileName="Assets/Scripts/PhotoCapture_Auth.cs" Line="41" Column="48" />
-      <File FileName="Assets/Scripts/ImageProcessing.cs" Line="30" Column="18" />
-      <File FileName="Assets/Scripts/Descriptors.cs" Line="180" Column="11" />
-    </Files>
+  <MonoDevelop.Ide.Workbench>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="IC_Recognita" expanded="True">
             <Node name="Assets" expanded="True">
               <Node name="Scripts" expanded="True">
-                <Node name="PhotoCapture_Auth.cs" selected="True" />
+                <Node name="Descriptors.cs" selected="True" />
               </Node>
             </Node>
           </Node>
@@ -22,7 +16,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="7ade0c45-2ec6-460e-94b2-6393ab58df44" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="b283c035-2fdc-4ad1-a0a6-d70f86d242a1" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

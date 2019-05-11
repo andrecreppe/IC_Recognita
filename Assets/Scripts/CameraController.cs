@@ -2,8 +2,6 @@
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-//ARRUMAR OS CAMERAERROR(int) -> DEPENDEM DO CAMERALANG
-
 public class CameraController : MonoBehaviour
 {
     //------------------ VARIABLES --------------------
@@ -18,6 +16,8 @@ public class CameraController : MonoBehaviour
     public Button snapButton, reloadButton;
 
     private Lang_Comp camcomplang;
+    private Lang_Auth camauth;
+    private Lang_AuthReg camauthreg;
 
     //---------------- PRIVATE METHODS --------------------
 
@@ -28,9 +28,15 @@ public class CameraController : MonoBehaviour
             camcomplang = FindObjectOfType<Lang_Comp>();
             camcomplang.CameraError(2);
         }
-        else
+        else if(SceneManager.GetActiveScene().name == "Authenticator")
         {
-            //outro lang
+            camauth = FindObjectOfType<Lang_Auth>();
+            camauth.CameraError(2);
+        }
+        else if(SceneManager.GetActiveScene().name == "AuthRegister")
+        {
+            camauthreg = FindObjectOfType<Lang_AuthReg>();
+            camauthreg.CameraError(2);
         }
 
         reloadButton.gameObject.SetActive(true);
@@ -52,9 +58,15 @@ public class CameraController : MonoBehaviour
                 camcomplang = FindObjectOfType<Lang_Comp>();
                 camcomplang.CameraError(1);
             }
-            else
+            else if (SceneManager.GetActiveScene().name == "Authenticator")
             {
-                //outro lang
+                camauth = FindObjectOfType<Lang_Auth>();
+                camauth.CameraError(1);
+            }
+            else if (SceneManager.GetActiveScene().name == "AuthRegister")
+            {
+                camauthreg = FindObjectOfType<Lang_AuthReg>();
+                camauthreg.CameraError(1);
             }
 
             camAvailable = false;
@@ -130,9 +142,15 @@ public class CameraController : MonoBehaviour
                 camcomplang = FindObjectOfType<Lang_Comp>();
                 camcomplang.CameraError(2);
             }
-            else
+            else if (SceneManager.GetActiveScene().name == "Authenticator")
             {
-                //outro lang
+                camauth = FindObjectOfType<Lang_Auth>();
+                camauth.CameraError(2);
+            }
+            else if (SceneManager.GetActiveScene().name == "AuthRegister")
+            {
+                camauthreg = FindObjectOfType<Lang_AuthReg>();
+                camauthreg.CameraError(2);
             }
 
             snapButton.gameObject.SetActive(false);
@@ -151,9 +169,15 @@ public class CameraController : MonoBehaviour
                 camcomplang = FindObjectOfType<Lang_Comp>();
                 camcomplang.CameraError(0);
             }
-            else
+            else if (SceneManager.GetActiveScene().name == "Authenticator")
             {
-                //outro lang
+                camauth = FindObjectOfType<Lang_Auth>();
+                camauth.CameraError(0);
+            }
+            else if (SceneManager.GetActiveScene().name == "AuthRegister")
+            {
+                camauthreg = FindObjectOfType<Lang_AuthReg>();
+                camauthreg.CameraError(0);
             }
 
             snapButton.gameObject.SetActive(true);

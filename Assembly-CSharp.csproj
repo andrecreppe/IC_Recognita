@@ -63,7 +63,10 @@
     <Compile Include="Assets\Scripts\AppController.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\Descriptors.cs" />
-    <Compile Include="Assets\Scripts\ImageProcessing.cs" />
+    <Compile Include="Assets\Scripts\ImgProcessing_Auth.cs" />
+    <Compile Include="Assets\Scripts\ImgProcessing_Comp.cs" />
+    <Compile Include="Assets\Scripts\Lang_Auth.cs" />
+    <Compile Include="Assets\Scripts\Lang_AuthReg.cs" />
     <Compile Include="Assets\Scripts\Lang_Comp.cs" />
     <Compile Include="Assets\Scripts\Lang_Configs.cs" />
     <Compile Include="Assets\Scripts\Lang_HelpComp.cs" />

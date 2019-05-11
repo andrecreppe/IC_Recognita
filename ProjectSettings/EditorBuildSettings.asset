@@ -24,9 +24,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Authenticator.unity
     guid: e1f0961d9f86049b288a4b72b5e3977a
   - enabled: 1
-    path: Assets/Scenes/AuthRegister.unity
+    path: Assets/Scenes/AuthTutorial.unity
     guid: 760a6a06559b541c5bd8215aa26b8d69
   - enabled: 1
-    path: Assets/Scenes/AuthTutorial.unity
+    path: Assets/Scenes/AuthRegister.unity
     guid: 86f72f3d03ef24e149da4752d3a16306
   m_configObjects: {}

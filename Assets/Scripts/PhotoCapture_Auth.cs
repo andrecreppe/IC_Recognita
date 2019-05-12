@@ -22,7 +22,6 @@ public class PhotoCapture_Auth : MonoBehaviour
         camcon = FindObjectOfType<CameraController>();
         imgprocauth = FindObjectOfType<ImgProcessing_Auth>();
         langauthreg = FindObjectOfType<Lang_AuthReg>();
-            langauthreg.UpdateSnapText(count);
     }
 
     private void Start()

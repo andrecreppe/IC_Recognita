@@ -1,18 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class ImgProcessing_Auth : MonoBehaviour
 {
     //------------------ VARIABLES --------------------
 
+    public Image result_menu;
+
     private Descriptors desc;
+    private CameraController camcon;
+    private Lang_Auth authlang;
 
     //---------------- PRIVATE METHODS -------------------
 
     private void Awake()
     {
         desc = FindObjectOfType<Descriptors>();
+        camcon = FindObjectOfType<CameraController>();
+        authlang = FindObjectOfType<Lang_Auth>();
     }
 
     /* Save the features array (256 size) to the memory */
@@ -48,6 +53,21 @@ public class ImgProcessing_Auth : MonoBehaviour
         return features;
     }
 
+    private void ShowResults(double resp, double tresh)
+    {
+        bool unlocked;
+
+        //Set the Result Display active
+        result_menu.gameObject.SetActive(!result_menu.gameObject.activeSelf);
+        camcon.ChangeCameraStatus();
+
+        unlocked = resp <= tresh;
+
+        Debug.Log("unlocked = " + unlocked);
+
+        authlang.Result(unlocked);
+    }
+
     //---------------- PUBLIC METHODS --------------------
 
     /* Manage the recognition calling -> Execute the comparison order */
@@ -75,11 +95,22 @@ public class ImgProcessing_Auth : MonoBehaviour
     /* Simulate unlocking a phone with face (compare stored and now) */
     public void TryToUnlock(Texture2D pic)
     {
+        double resp;
         int[] features, recorded;
 
         features = desc.ExtractLBPFeatures(pic);
         recorded = GetFeatures();
 
-        Debug.Log("cossine: " + desc.CompareImages(features, recorded));
+        resp = desc.CompareImages(features, recorded);
+
+        Debug.Log("cossine = " + resp);
+
+        ShowResults(resp, desc.ActiveTreshold());
+    }
+
+    public void CloseResults()
+    {
+        result_menu.gameObject.SetActive(!result_menu.gameObject.activeSelf);
+        camcon.ChangeCameraStatus();
     }
 }

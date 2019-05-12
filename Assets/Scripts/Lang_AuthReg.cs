@@ -20,6 +20,8 @@ public class Lang_AuthReg : MonoBehaviour
         //Setup
         langKey = "lang";
         count = PlayerPrefs.GetInt(langKey);
+
+        UpdateSnapText(0);
     }
 
     //---------------- PUBLIC METHODS --------------------

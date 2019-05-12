@@ -8,7 +8,6 @@ public class ImgProcessing_Comp : MonoBehaviour
 {
     //------------------ VARIABLES --------------------
 
-    public bool saveData;
     public Image result_menu;
 
     private CameraController camcon;
@@ -37,47 +36,7 @@ public class ImgProcessing_Comp : MonoBehaviour
 
         thesame = resp <= treshold;
 
-        if (thesame) //Equal images
-            camlang.Result(resp, true);
-        else //Different Images
-            camlang.Result(resp, false);
-
-        //SaveResult(resp, perc, thesame);
-    }
-
-    /* Save the results as a log */
-    private void SaveResult(double resp, double perc, bool equal)
-    {
-        if (saveData)
-        {
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream fs;
-            string log, path;
-
-            path = Application.persistentDataPath + "/results.log";
-            log = "";
-
-            //Check if a file exists
-            if (File.Exists(path))
-            {
-                //Load file
-                fs = File.Open(path, FileMode.Open);
-                log = (string)bf.Deserialize(fs);
-                fs.Close();
-            }
-
-            //Build the new log structure
-            log += "Date: " + DateTime.Now;
-            log += "\nPdist: " + resp;
-            log += "\nEquality: " + equal;
-            log += "\nPercentage: " + perc;
-            log += "\n----------------------------\n";
-
-            //Create the results
-            fs = File.Create(path);
-            bf.Serialize(fs, log);
-            fs.Close();
-        }
+        camlang.Result(resp, thesame);
     }
 
     //---------------- PUBLIC METHODS --------------------

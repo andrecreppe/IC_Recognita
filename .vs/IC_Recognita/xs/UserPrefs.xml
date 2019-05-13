@@ -1,7 +1,7 @@
 ﻿<Properties StartupConfiguration="{8584B326-16EA-5EBB-70CD-2669415A1C13}|">
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Lang_Auth.cs">
     <Files>
-      <File FileName="Assets/Scripts/Lang_Auth.cs" Line="125" Column="23" />
+      <File FileName="Assets/Scripts/Lang_Auth.cs" Line="92" Column="14" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -19,7 +19,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="0df3c174-bc1e-4879-8b60-846622b29255" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="bd00fd47-4bc6-4f8d-9ca1-c7f146eb1cf1" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

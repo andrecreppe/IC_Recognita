@@ -89,7 +89,7 @@ public class Lang_Auth : MonoBehaviour
         string description = "";
         Color32 textColor;
 
-        if (unlocked)
+        if (!unlocked)
         {
             textColor = new Color32(207, 109, 0, 255);
 
@@ -108,7 +108,11 @@ public class Lang_Auth : MonoBehaviour
                     	"\n;-;";
                     break;
                 case 3:
-                    description = "";
+                    description = "Das Gesicht stimmt" +
+                    	"\nnicht mit dem " +
+                    	"\nregistrierten " +
+                    	"\nüberein" +
+                    	"\n;-;";
                     break;
             }
         }
@@ -119,16 +123,22 @@ public class Lang_Auth : MonoBehaviour
             switch (count)
             {
                 case 1:
-                    description = "A face bateu com " +
-                    	"\na registrada no " +
+                    description = "A face bateu com" +
+                    	"\na registrada no" +
                     	"\ndispositivo!" +
                     	"\n:)";
                     break;
                 case 2:
-                    description = "";
+                    description = "The face matched" +
+                    	"\nwith the registered" +
+                    	"\none" +
+                    	"\n:)";
                     break;
                 case 3:
-                    description = "";
+                    description = "Das Gesicht" +
+                    	"\npasste zu" +
+                    	"\nden registrierten" +
+                    	"\n:)";
                     break;
             }
 

@@ -9,7 +9,7 @@ public class Lang_Info : MonoBehaviour
     private string langKey;
     private bool emailAndre, emailNilceu;
 
-    public Text info, andre, nilceu;
+    public Text info, andre, nilceu, contact;
 
     //------------------ PRIVATE METHODS --------------------
 
@@ -120,6 +120,8 @@ public class Lang_Info : MonoBehaviour
                 "utilizando elementos da \n" +
                 "face e da região ocular.";
 
+                contact.text = "(Clique para contato)";
+
                 AndreText();
                 NilceuText();
 
@@ -133,6 +135,8 @@ public class Lang_Info : MonoBehaviour
                 "biometric system utilizing \n" +
                 "elements of the face and \n" +
                 "ocular region.";
+
+                contact.text = "(Click for contact)";
 
                 AndreText();
                 NilceuText();
@@ -148,6 +152,8 @@ public class Lang_Info : MonoBehaviour
                 "Elementen des Gesichts \n" +
                 "und des Augengebiets \n" +
                 "testen soll.";
+
+                contact.text = "(Klicken Sie für Kontakt)";
 
                 AndreText();
                 NilceuText();

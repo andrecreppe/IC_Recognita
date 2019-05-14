@@ -7,7 +7,9 @@ public class PhotoCapture_Auth : MonoBehaviour
 
     private int count;
     private Texture2D pic1, pic2, pic3;
+
     public Text snapText;
+    public Image confirmationDialog;
 
     private AppController appcontrl;
     private CameraController camcon;
@@ -50,19 +52,28 @@ public class PhotoCapture_Auth : MonoBehaviour
 
                 break;
             default:
-                imgprocauth.SavePerson(pic1, pic2, pic3);
-
-                pic1 = null;
-                pic2 = null;
-                pic3 = null;
-
-                appcontrl.LoadAuthenticator();
+                if (PlayerPrefs.HasKey("features0"))
+                    confirmationDialog.gameObject.SetActive(true);
+                else
+                    Overwrite();
 
                 break;
         }
 
         langauthreg.UpdateSnapText(count);
         count++;
+    }
+
+    public void Overwrite()
+    {
+        imgprocauth.SavePerson(pic1, pic2, pic3);
+
+        appcontrl.LoadAuthenticator();
+    }
+
+    public void CancelOverwrite()
+    {
+        appcontrl.LoadAuthRegister(); //is eficient?
     }
 
     public void DoSnapAuthenticator()

@@ -1,4 +1,9 @@
-﻿using UnityEngine;
+﻿/* REALIZAR UMA LIMPEZA NOS CÓDIGOS: 
+- Comentar funções
+- Padronizar variáveis
+*/
+
+using UnityEngine;
 using UnityEngine.SceneManagement;
 #if PLATFORM_ANDROID
     using UnityEngine.Android;
@@ -56,7 +61,15 @@ public class AppController : MonoBehaviour
     //Authenticator loaders
     public void LoadAuthenticator()
     {
-        SceneManager.LoadScene("Authenticator");
+        if (PlayerPrefs.HasKey("features0"))
+            SceneManager.LoadScene("Authenticator");
+        else
+        {
+            if (SceneManager.GetActiveScene().name == "AuthRegister")
+                LoadMenu();
+            else
+                LoadAuthRegister();
+        }
     }
 
     public void LoadAuthRegister()

@@ -11,7 +11,7 @@ public class Lang_AuthReg : MonoBehaviour
     private int count;
     private string langKey;
 
-    public Text errorTxt, reloadTxt, snapText;
+    public Text errorTxt, reloadTxt, snapText, msgText, descText, warnText, yesText, noText;
 
     //---------------- PRIVATE METHODS -------------------
 
@@ -21,31 +21,32 @@ public class Lang_AuthReg : MonoBehaviour
         langKey = "lang";
         count = PlayerPrefs.GetInt(langKey);
 
-        UpdateSnapText(0);
+        UpdateSnapText(-1);
+        UpdateMessageText();
     }
 
     //---------------- PUBLIC METHODS --------------------
 
-    public void UpdateSnapText(int count)
+    public void UpdateSnapText(int numimg)
     {
         string msg = "";
 
-        count++;
+        numimg++;
 
-        if (count < 3)
+        if (numimg < 3)
         {
             switch (PlayerPrefs.GetInt(langKey))
             {
                 case 1: //Pt
-                    msg = "Registrar (" + count + "/3)";
+                    msg = "Registrar (" + numimg + "/3)";
 
                     break;
                 case 2: //En
-                    msg = "Register (" + count + "/3)";
+                    msg = "Register (" + numimg + "/3)";
 
                     break;
                 case 3: //De
-                    msg = "Unterlagen (" + count + "/3)";
+                    msg = "Unterlagen (" + numimg + "/3)";
 
                     break;
             }
@@ -70,6 +71,85 @@ public class Lang_AuthReg : MonoBehaviour
         }
 
         snapText.text = msg;
+    }
+
+    public void UpdateMessageText()
+    {
+        string msg = "";
+
+        if(!PlayerPrefs.HasKey("features0"))
+        {
+            switch (PlayerPrefs.GetInt(langKey))
+            {
+                case 1: //Pt
+                    msg = "Primeiro registro";
+
+                    break;
+                case 2: //En
+                    msg = "First record";
+
+                    break;
+                case 3: //De
+                    msg = "Erste verzeichnis";
+
+                    break;
+            }
+        }
+        else
+        {
+            switch (PlayerPrefs.GetInt(langKey))
+            {
+                case 1: //Pt
+                    msg = "Novo registro";
+
+                    break;
+                case 2: //En
+                    msg = "New record";
+
+                    break;
+                case 3: //De
+                    msg = "Neu verzeichnis";
+
+                    break;
+            }
+        }
+
+        msgText.text = msg;
+    }
+
+    public void UpdateConfirmationText()
+    {
+        string description = "", warning = "", yes = "", no = "";
+
+        switch (PlayerPrefs.GetInt(langKey))
+        {
+            case 1: //Pt
+                description = "";
+                warning = "";
+                yes = "";
+                no = "";
+
+                break;
+            case 2: //En
+                description = "";
+                warning = "";
+                yes = "";
+                no = "";
+
+                break;
+            case 3: //De
+                description = "";
+                warning = "";
+                yes = "";
+                no = "";
+
+                break;
+        }
+
+        descText.text = description;
+        warnText.text = warning;
+        yesText.text = yes;
+        noText.text = no;
     }
 
     /* Set the language of the error */

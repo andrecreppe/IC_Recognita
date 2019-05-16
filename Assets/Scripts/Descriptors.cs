@@ -14,31 +14,6 @@ public class Descriptors : MonoBehaviour
 
     //---------------- PREPARATION METHODS --------------------
 
-    /* Convert a image to gray */
-    private Texture2D ConvertToGrayscale(Texture2D graph)
-    {
-        Color32[] pixels = graph.GetPixels32();
-        for (int x = 0; x < graph.width; x++)
-        {
-            for (int y = 0; y < graph.height; y++)
-            {
-                Color32 pixel = pixels[x + y * graph.width];
-                int p = ((256 * 256 + pixel.r) * 256 + pixel.b) * 256 + pixel.g;
-                int b = p % 256;
-                p = Mathf.FloorToInt(p / 256);
-                int g = p % 256;
-                p = Mathf.FloorToInt(p / 256);
-                int r = p % 256;
-                float l = (0.2126f * r / 255f) + 0.7152f * (g / 255f) + 0.0722f * (b / 255f);
-                Color c = new Color(l, l, l, 1);
-                graph.SetPixel(x, y, c);
-            }
-        }
-        graph.Apply(false);
-
-        return graph;
-    }
-
     /* Resize the image to make the LBP */
     private Texture2D CutImage(Texture2D raw)
     {
@@ -67,6 +42,25 @@ public class Descriptors : MonoBehaviour
         resized.Apply();
 
         return resized;
+    }
+
+    private int[,] ResizeImage(int[,] img, int height, int width)
+    {
+        int med;
+        int[,] novo = new int[height, width];
+
+        for (int i = 0; i < height; i+=2)
+        {
+            for (int j = 0; j < width; j+=2)
+            {
+                med = img[i,j] + img[i+1,j] + img[i,j+1] + img[i+1,j+1];
+                novo[i, j] = Mathf.RoundToInt(med / 4);
+            }
+
+            Debug.Log("h final = " + i);
+        }
+
+        return novo;
     }
 
     //---------------- MATRIX MANIPULATION METHODS --------------------
@@ -195,7 +189,7 @@ public class Descriptors : MonoBehaviour
         ////////////////////////////////////////////
         //PHASE 2 -> Matrix Manipulation
         int[] features = new int[256];
-        Array.Clear(features, 0, features.Length);
+            Array.Clear(features, 0, features.Length);
         int[,] pic_new = new int[pic.height, pic.width];
         int[,] mini_area = new int[3, 3];
         int[,] pesos = {
@@ -203,6 +197,7 @@ public class Descriptors : MonoBehaviour
             { 128, 0, 8 },
             { 64, 32, 16 }
         };
+
 
         for (int i = 1; i < pic.height - 2; i++)
         {
@@ -225,7 +220,7 @@ public class Descriptors : MonoBehaviour
                 );
 
                 ////////////////////////////////////////////
-                //PHASE 3 -> Features Generation
+                //PHASE 3 -> Features sorting
                 features[pic_new[i, j]] += 1;
             }
         }
@@ -259,7 +254,15 @@ public class Descriptors : MonoBehaviour
     public double CompareImages(Texture2D img1, Texture2D img2)
     {
         int[] features1, features2;
-        double resp = -1;
+        double resp = 0;
+
+        if(Screen.width >= 1080)
+        {
+            img1.Resize(img1.width / 2, img1.height / 2);
+                img1.Apply();
+            img2.Resize(img2.width / 2, img2.height / 2);
+                img2.Apply();
+        }
 
         features1 = ExtractLBPFeatures(img1);
         features2 = ExtractLBPFeatures(img2);

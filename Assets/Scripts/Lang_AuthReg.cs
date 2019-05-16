@@ -12,6 +12,7 @@ public class Lang_AuthReg : MonoBehaviour
     private string langKey;
 
     public Text errorTxt, reloadTxt, snapText, msgText, descText, warnText, yesText, noText;
+    public Button snapButton;
 
     //---------------- PRIVATE METHODS -------------------
 
@@ -53,6 +54,13 @@ public class Lang_AuthReg : MonoBehaviour
         }
         else
         {
+            ColorBlock colors = snapButton.colors;
+            colors.normalColor = new Color32(0, 255, 255, 255);
+            colors.highlightedColor = new Color32(0, 255, 255, 255);
+            colors.pressedColor = new Color32(160, 255, 255, 255);
+
+            snapButton.colors = colors;
+
             switch (PlayerPrefs.GetInt(langKey))
             {
                 case 1: //Pt
@@ -124,24 +132,35 @@ public class Lang_AuthReg : MonoBehaviour
         switch (PlayerPrefs.GetInt(langKey))
         {
             case 1: //Pt
-                description = "";
-                warning = "";
-                yes = "";
-                no = "";
+                description = "Sobrescrever os" +
+                	"\ndados salvos";
+                warning = "Você quer realmente" +
+                	"\nsubstituir os dados" +
+                	"\nsalvos com novos?";
+                yes = "Sim";
+                no = "Não";
 
                 break;
             case 2: //En
-                description = "";
-                warning = "";
-                yes = "";
-                no = "";
+                description = "Overwrite saved" +
+                	"\ndata";
+                warning = "Do you realy want" +
+                	"\nto replace the " +
+                	"\nactual features with" +
+                	"\nnew ones?";
+                yes = "Yes";
+                no = "No";
 
                 break;
             case 3: //De
-                description = "";
-                warning = "";
-                yes = "";
-                no = "";
+                description = "Überschreiben Sie" +
+                	"\ngespeicherte Daten:";
+                warning = "Möchten Sie wirklich" +
+                	"\ndie gespeicherten" +
+                	"\nDaten durch neue" +
+                	"\nersetzen?";
+                yes = "Ja";
+                no = "Nein";
 
                 break;
         }

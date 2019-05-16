@@ -92,15 +92,15 @@ public class Lang_Info : MonoBehaviour
             {
                 case 1: //Portugues
                     nilceu.text = "Professor Orientador:\n" +
-                        "\tProf. Dr. Nilceu Marana";
+                        "\tProf. Dr. A. Nilceu Marana";
                     break;
                 case 2: //English
                     nilceu.text = "Advisor Teacher:\n" +
-                        "\tProf. Dr. Nilceu Marana";
+                        "\tProf. Dr. A. Nilceu Marana";
                     break;
                 case 3: //Deutsch
                     nilceu.text = "Ratgeber Lehrer:\n" +
-                        "\tProf. Dr. Nilceu Marana";
+                        "\tProf. Dr. A. Nilceu Marana";
                     break;
             }
         }

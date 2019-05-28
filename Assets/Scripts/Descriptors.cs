@@ -14,7 +14,7 @@ public class Descriptors : MonoBehaviour
 
     //---------------- PREPARATION METHODS --------------------
 
-    /* Resize the image to make the LBP */
+    /* Cut the image to the red-circle format */
     private Texture2D CutImage(Texture2D raw)
     {
         double calc, w, h;
@@ -44,8 +44,24 @@ public class Descriptors : MonoBehaviour
         return resized;
     }
 
-    private int[,] ResizeImage(int[,] img, int height, int width)
+    /* Change the size of the image without losing qualiy */
+    /* Reduce background noise */
+
+    /*private Texture2D ResizeImage(Texture2D pic)
     {
+        //PHASE 1 -> Conversion to Integers
+        Color[] uni = pic.GetPixels();
+        int[,] mat = new int[pic.height, pic.width];
+        int count = 0;
+
+        for (int i = 0; i < pic.height; i++)
+        {
+            for (int j = 0; j < pic.width; j++)
+            {
+                mat[i, j] = Mathf.RoundToInt(uni[count++].grayscale * 255);
+            }
+        }
+
         int med;
         int[,] novo = new int[height, width];
 
@@ -56,12 +72,10 @@ public class Descriptors : MonoBehaviour
                 med = img[i,j] + img[i+1,j] + img[i,j+1] + img[i+1,j+1];
                 novo[i, j] = Mathf.RoundToInt(med / 4);
             }
-
-            Debug.Log("h final = " + i);
         }
 
         return novo;
-    }
+    }*/
 
     //---------------- MATRIX MANIPULATION METHODS --------------------
 
@@ -247,7 +261,7 @@ public class Descriptors : MonoBehaviour
         }
     }
 
-    //---------------- PUBLIC METHODS --------------------
+    //---------------- PUBLIC METHODS - Calculation --------------------
 
     /* Compare two images using the LBP method, with a given distance method */
     /* Best options: Cosine > Euclidian > Cityblock */
@@ -255,14 +269,6 @@ public class Descriptors : MonoBehaviour
     {
         int[] features1, features2;
         double resp = 0;
-
-        if(Screen.width >= 1080)
-        {
-            img1.Resize(img1.width / 2, img1.height / 2);
-                img1.Apply();
-            img2.Resize(img2.width / 2, img2.height / 2);
-                img2.Apply();
-        }
 
         features1 = ExtractLBPFeatures(img1);
         features2 = ExtractLBPFeatures(img2);
@@ -302,6 +308,8 @@ public class Descriptors : MonoBehaviour
         return resp;
     }
 
+    //---------------- PUBLIC METHODS - Info --------------------
+
     /* Get the treshold for the comparator in use */
     public double ActiveTreshold()
     {
@@ -331,5 +339,90 @@ public class Descriptors : MonoBehaviour
     public int GetDescriptorInUse()
     {
         return selected_comparator;
+    }
+
+    /* Get the info about the selected descriptor */
+    public string DescriptorInfo(int lang)
+    {
+        string resp = "- ";
+
+        switch (GetDescriptorInUse())
+        {
+            case 3: //Cossine
+                switch (lang)
+                {
+                    case 1:
+                        resp += "Na configuração atual" +
+                            "\n<b>(Cosseno)</b> ela representa" +
+                            "\na distância vetorial entre" +
+                            "\nseus pixeis.";
+
+                        break;
+
+                    //English
+                    case 2:
+                        resp += "The selected descriptor" +
+                            "\n<b>(Cossine)</b> represents the " +
+                            "\nvectorial distance between" +
+                            "\nthe image pixels.";
+
+                        break;
+
+                    //Deutsch
+                    case 3:
+                        resp += "- Der ausgewählte Deskriptor " +
+                            "\n<b>(Cossine)</b> stellt die vektoriell " +
+                            "\nAbstand zwischen die \nBildpunkte.";
+
+                        break;
+                }
+                break;
+
+            case 2: //Euclidian
+                switch (lang)
+                {
+                    case 1:
+                        resp += "";
+
+                        break;
+
+                    //English
+                    case 2:
+                        resp += "";
+
+                        break;
+
+                    //Deutsch
+                    case 3:
+                        resp += "";
+
+                        break;
+                }
+                break;
+
+            case 1: //Cityblock
+                switch (lang)
+                {
+                    case 1:
+                        resp += "";
+
+                        break;
+
+                    //English
+                    case 2:
+                        resp += "";
+
+                        break;
+
+                    //Deutsch
+                    case 3:
+                        resp += "";
+
+                        break;
+                }
+                break;
+        }
+
+        return resp;
     }
 }

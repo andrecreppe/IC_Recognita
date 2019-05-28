@@ -53,6 +53,7 @@ public class ImgProcessing_Auth : MonoBehaviour
         return features;
     }
 
+    /* Opens the result display to show the results */
     private void ShowResults(double resp, double tresh)
     {
         bool unlocked;
@@ -108,6 +109,7 @@ public class ImgProcessing_Auth : MonoBehaviour
         ShowResults(resp, desc.ActiveTreshold());
     }
 
+    /* Close the result display */
     public void CloseResults()
     {
         result_menu.gameObject.SetActive(!result_menu.gameObject.activeSelf);

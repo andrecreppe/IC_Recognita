@@ -69,6 +69,7 @@
     <Compile Include="Assets\Scripts\Lang_AuthReg.cs" />
     <Compile Include="Assets\Scripts\Lang_Comp.cs" />
     <Compile Include="Assets\Scripts\Lang_Configs.cs" />
+    <Compile Include="Assets\Scripts\Lang_HelpAuth.cs" />
     <Compile Include="Assets\Scripts\Lang_HelpComp.cs" />
     <Compile Include="Assets\Scripts\Lang_Info.cs" />
     <Compile Include="Assets\Scripts\Lang_Menu.cs" />

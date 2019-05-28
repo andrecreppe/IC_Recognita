@@ -27,88 +27,25 @@ public class Lang_HelpComp : MonoBehaviour
         UpdateCapture();
     }
 
-    private string DescriptorInfo()
+    private void UpdateButtons()
     {
-        string resp = "- ";
-
-        switch(descr.GetDescriptorInUse())
+        switch(count)
         {
-            case 3: //Cossine
-                switch(count)
-                {
-                    case 1:
-                        resp += "Na configuração atual" +
-                        	"\n<b>(Cosseno)</b> ela representa" +
-                        	"\na distância vetorial entre" +
-                        	"\nseus pixeis.";
-
-                        break;
-
-                    //English
-                    case 2:
-                        resp += "The selected descriptor" +
-                        	"\n<b>(Cossine)</b> represents the " +
-                        	"\nvectorial distance between" +
-                        	"\nthe image pixels.";
-
-                        break;
-
-                    //Deutsch
-                    case 3:
-                        resp += "- Der ausgewählte Deskriptor " +
-                        	"\n<b>(Cossine)</b> stellt die vektoriell " +
-                        	"\nAbstand zwischen die \nBildpunkte.";
-
-                        break;
-                }
+            case 1:
+                capture.text = "Capturar";
+                results.text = "Resultados";
                 break;
 
-            case 2: //Euclidian
-                switch (count)
-                {
-                    case 1:
-                        resp += "";
-
-                        break;
-
-                    //English
-                    case 2:
-                        resp += "";
-
-                        break;
-
-                    //Deutsch
-                    case 3:
-                        resp += "";
-
-                        break;
-                }
+            case 2:
+                capture.text = "Capture";
+                results.text = "Results";
                 break;
 
-            case 1: //Cityblock
-                switch (count)
-                {
-                    case 1:
-                        resp += "";
-
-                        break;
-
-                    //English
-                    case 2:
-                        resp += "";
-
-                        break;
-
-                    //Deutsch
-                    case 3:
-                        resp += "";
-
-                        break;
-                }
+            case 3:
+                capture.text = "Aufnehmen";
+                results.text = "Ergebnis";
                 break;
         }
-
-        return resp;
     }
 
     //------------------ PUBLIC METHODS --------------------
@@ -124,7 +61,6 @@ public class Lang_HelpComp : MonoBehaviour
             //Português
             case 1:
                 howTo.text = "Como capturar a face:";
-
                 steps.text = "1) Alinhe seu rosto com a\n\tborda vermelha\n\n" +
                     "2) Aperte o botão \"Snap!\";\n\n" +
                     "2.1) Caso a imagem fique\n" +
@@ -135,15 +71,13 @@ public class Lang_HelpComp : MonoBehaviour
                     "\timagens, clique em \"Go\"\n" +
                     "\te espere pelo resultado!";
 
-                capture.text = "Capturar";
-                results.text = "Resultados";
+                UpdateButtons();
 
                 break;
 
             //English
             case 2:
                 howTo.text = "How to capture the face:";
-
                 steps.text = "1) Align your face with the \n" +
                     "\tred border;\n\n" +
                     "2) Press the button \"Snap!\";\n\n" +
@@ -155,15 +89,13 @@ public class Lang_HelpComp : MonoBehaviour
                     "\timages, press \"Go\" and\n" +
                     "\twait for the result!";
 
-                capture.text = "Capture";
-                results.text = "Results";
+                UpdateButtons();
 
                 break;
 
             //Deutsch
             case 3:
                 howTo.text = "Wie das Gesicht aufnehmen:";
-
                 steps.text = "1) Richten Sie das Gesicht\n" +
                     "\tmit dem rotem Rand;\n\n" +
                     "2) Drücken Sie die Taste\n" +
@@ -177,8 +109,7 @@ public class Lang_HelpComp : MonoBehaviour
                     "\t\"Go!\" und warten für das\n" +
                     "\tErgebnis!";
 
-                capture.text = "Aufnehmen";
-                results.text = "Ergebnis";
+                UpdateButtons();
 
                 break;
         }
@@ -196,12 +127,12 @@ public class Lang_HelpComp : MonoBehaviour
                 howTo.text = "Como ler o resultado:";
 
                 steps.text = "- O valor <b>Pdist</b> após o" +
-                	"\nreconhecimento representa" +
-                	"\na distância entre as duas" +
-                	"\nimagens;" +
-                	"\n\n- Quanto menor esse valor" +
+                    "\nreconhecimento representa" +
+                    "\na distância entre as duas" +
+                    "\nimagens;" +
+                    "\n\n- Quanto menor esse valor" +
                     "\nfor, mais semelhantes são;" +
-                    "\n\n" + DescriptorInfo();
+                    "\n\n" + descr.DescriptorInfo(count);
 
                 capture.text = "Capturar";
                 results.text = "Resultados";
@@ -213,12 +144,12 @@ public class Lang_HelpComp : MonoBehaviour
                 howTo.text = "How to read the results";
 
                 steps.text = "- The value <b>Pdist</b> after the" +
-                	"\nrecognition represents the " +
-                	"\ndistance between the two " +
-                	"\nimages;" +
-                	"\n\n- Lower values represent a" +
-                	"\nbigger similarity;" +
-                	"\n\n" + DescriptorInfo();
+                    "\nrecognition represents the " +
+                    "\ndistance between the two " +
+                    "\nimages;" +
+                    "\n\n- Lower values represent a" +
+                    "\nbigger similarity;" +
+                    "\n\n" + descr.DescriptorInfo(count);
 
                 capture.text = "Capture";
                 results.text = "Results";
@@ -230,12 +161,12 @@ public class Lang_HelpComp : MonoBehaviour
                 howTo.text = "Wie das Ergebnis liest";
 
                 steps.text = "- Der Wert Pdist nach der " +
-                	"\nErkennung stellt den " +
-                	"\nAbstand zwischen den " +
-                	"\nbeiden Bildern dar;" +
-                	"\n\n- Niedrigere Werte stellen " +
-                	"\neine größere Ähnlichkeit dar;" +
-                	"\n\n" + DescriptorInfo();
+                    "\nErkennung stellt den " +
+                    "\nAbstand zwischen den " +
+                    "\nbeiden Bildern dar;" +
+                    "\n\n- Niedrigere Werte stellen " +
+                    "\neine größere Ähnlichkeit dar;" +
+                    "\n\n" + descr.DescriptorInfo(count);
 
                 capture.text = "Aufnehmen";
                 results.text = "Ergebnis";

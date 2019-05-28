@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 #if PLATFORM_ANDROID
-using UnityEngine.Android;
+    using UnityEngine.Android;
 #endif
 
 public class Lang_Auth : MonoBehaviour

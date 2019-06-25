@@ -1,7 +1,7 @@
 ﻿<Properties StartupConfiguration="{8584B326-16EA-5EBB-70CD-2669415A1C13}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Descriptors.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Lang_Info.cs">
     <Files>
-      <File FileName="Assets/Scripts/Descriptors.cs" Line="191" Column="36" />
+      <File FileName="Assets/Scripts/Lang_Info.cs" Line="57" Column="53" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -9,7 +9,7 @@
           <Node name="IC_Recognita" expanded="True">
             <Node name="Assets" expanded="True">
               <Node name="Scripts" expanded="True">
-                <Node name="Descriptors.cs" selected="True" />
+                <Node name="Lang_Info.cs" selected="True" />
               </Node>
             </Node>
           </Node>
@@ -19,7 +19,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="5f67ca47-3e90-413d-b311-bd89d6e59c05" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="52b9f8e3-5918-4e94-9f26-05bd2fdd9ca5" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -64,8 +64,6 @@ public class ImgProcessing_Auth : MonoBehaviour
 
         unlocked = resp <= tresh;
 
-        Debug.Log("unlocked = " + unlocked);
-
         authlang.Result(unlocked);
     }
 
@@ -103,8 +101,6 @@ public class ImgProcessing_Auth : MonoBehaviour
         recorded = GetFeatures();
 
         resp = desc.CompareImages(features, recorded);
-
-        Debug.Log("cossine = " + resp);
 
         ShowResults(resp, desc.ActiveTreshold());
     }

@@ -1,16 +1,13 @@
-﻿/* REALIZAR UMA LIMPEZA NOS CÓDIGOS: 
-- Comentar funções
-- Padronizar variáveis
-*/
-
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
-#if PLATFORM_ANDROID
-    using UnityEngine.Android;
-#endif
+using UnityEngine.Android; //ANDROID specific
 
 public class AppController : MonoBehaviour
 {
+    //------------------ VARIABLES -----------------
+
+    private readonly string comparatorKey = "descriptor";
+
     //---------------- PRIVATE METHODS -----------------
 
     private void Awake()
@@ -34,10 +31,11 @@ public class AppController : MonoBehaviour
     private void Start()
     {
         //Allow camera for android devices
-        #if PLATFORM_ANDROID
-            if (!Permission.HasUserAuthorizedPermission(Permission.Camera))
-                Permission.RequestUserPermission(Permission.Camera);
-        #endif
+        if (!Permission.HasUserAuthorizedPermission(Permission.Camera))
+            Permission.RequestUserPermission(Permission.Camera);
+
+        if (!PlayerPrefs.HasKey(comparatorKey))
+            PlayerPrefs.SetInt(comparatorKey, 3); //Default = Cossine
     }
 
     //-------------- PUBLIC METHODS (Scene Loaders) ---------------

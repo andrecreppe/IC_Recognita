@@ -157,7 +157,7 @@ PlayerSettings:
   applicationIdentifier:
     Android: com.andrecreppe.Recognita
   buildNumber: {}
-  AndroidBundleVersionCode: 1
+  AndroidBundleVersionCode: 2
   AndroidMinSdkVersion: 21
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
@@ -246,7 +246,7 @@ PlayerSettings:
   AndroidTargetArchitectures: 5
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: Publish/upload.keystore
+  AndroidKeystoreName: Publish/keystore.keystore
   AndroidKeyaliasName: upload
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 1

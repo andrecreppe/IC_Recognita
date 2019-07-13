@@ -72,7 +72,6 @@ public class ImgProcessing_Auth : MonoBehaviour
     /* Manage the recognition calling -> Execute the comparison order */
     public void SavePerson(Texture2D img1, Texture2D img2, Texture2D img3)
     {
-        int sum = 0;
         int[] f1, f2, f3, final;
 
         final = new int[256];
@@ -82,11 +81,7 @@ public class ImgProcessing_Auth : MonoBehaviour
         f3 = desc.ExtractLBPFeatures(img3);
 
         for(int i=0; i<256; i++)
-        {
-            sum = (f1[i] + f2[i] + f3[i]) / 3;
-
-            final[i] = sum;
-        }
+            final[i] = (f1[i] + f2[i] + f3[i]) / 3;
 
         SaveFeatures(final);
     }

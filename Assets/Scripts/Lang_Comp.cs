@@ -174,6 +174,12 @@ public class Lang_Comp : MonoBehaviour
         //Set the descriptor info
         txt += "\n<i>[" + DescriptorName() + "]</i>";
 
+        /*-------*/
+            //BETA FUNCTION!!!!!
+            if (desc.GetDescriptorInUse() < 3)
+                txt += "\n<i>BETA RESULT</i>";
+        /*-------*/
+
         //Set the result
         dataTxt.color = cor;
         dataTxt.text = txt;

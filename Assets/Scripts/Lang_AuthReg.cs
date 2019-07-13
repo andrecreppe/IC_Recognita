@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-#if PLATFORM_ANDROID
-    using UnityEngine.Android;
-#endif
+using UnityEngine.Android; //Android specific library
 
 public class Lang_AuthReg : MonoBehaviour
 {
@@ -213,27 +211,25 @@ public class Lang_AuthReg : MonoBehaviour
             }
         }
 
-        //Camera denied
-        #if PLATFORM_ANDROID
-            if (!Permission.HasUserAuthorizedPermission(Permission.Camera))
+        //Camera denied -- android version
+        if (!Permission.HasUserAuthorizedPermission(Permission.Camera))
+        {
+            switch (PlayerPrefs.GetInt(langKey))
             {
-                switch (PlayerPrefs.GetInt(langKey))
-                {
-                    case 1: //Pt
-                        msg = "ERRO!\n\nCâmera não\nautorizada\n:(";
-                        msg2 = "Reccaregar";
-                        break;
-                    case 2: //En
-                        msg = "ERROR!\n\nCamera not\nauthorized\n:(";
-                        msg2 = "Reload";
-                        break;
-                    case 3: //De
-                        msg = "FEHLER!\n\nKamera nicht\nautorisiert\n:(";
-                        msg2 = "Aufladen";
-                        break;
-                }
+                case 1: //Pt
+                    msg = "ERRO!\n\nCâmera não\nautorizada\n:(";
+                    msg2 = "Reccaregar";
+                    break;
+                case 2: //En
+                    msg = "ERROR!\n\nCamera not\nauthorized\n:(";
+                    msg2 = "Reload";
+                    break;
+                case 3: //De
+                    msg = "FEHLER!\n\nKamera nicht\nautorisiert\n:(";
+                    msg2 = "Aufladen";
+                    break;
             }
-        #endif
+        }
 
         errorTxt.text = msg;
         reloadTxt.text = msg2;

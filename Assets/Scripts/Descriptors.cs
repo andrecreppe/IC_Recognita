@@ -47,7 +47,7 @@ public class Descriptors : MonoBehaviour
     /* Change the size of the image without losing qualiy */
     /* Reduce background noise */
 
-    /*private Texture2D ResizeImage(Texture2D pic)
+    /*private Texture2D ResizeImage(Texture2D pic) -- BETA
     {
         //PHASE 1 -> Conversion to Integers
         Color[] uni = pic.GetPixels();
@@ -370,9 +370,10 @@ public class Descriptors : MonoBehaviour
 
                     //Deutsch
                     case 3:
-                        resp += "- Der ausgewählte Deskriptor " +
+                        resp += "Der ausgewählte Deskriptor " +
                             "\n<b>(Cossine)</b> stellt die vektoriell " +
-                            "\nAbstand zwischen die \nBildpunkte.";
+                            "\nAbstand zwischen die " +
+                            "\nPixel.";
 
                         break;
                 }
@@ -382,19 +383,28 @@ public class Descriptors : MonoBehaviour
                 switch (lang)
                 {
                     case 1:
-                        resp += "";
+                        resp += "Na configuração atual" +
+                            "\n<b>(Euclidiano)</b> ele representa" +
+                            "\no tamanho de um segmento" +
+                            "\nque conecta dois pixeis.";
 
                         break;
 
                     //English
                     case 2:
-                        resp += "";
+                        resp += "The selected descriptor" +
+                            "\n<b>(Euclidian)</b> represents the " +
+                            "\nsize of a segment that" +
+                            "\nconects two pixels.";
 
                         break;
 
                     //Deutsch
                     case 3:
-                        resp += "";
+                        resp += "Der ausgewählte Deskriptor " +
+                            "\n<b>(Euclidian)</b> stellt die Größe " +
+                            "\neines Segments das zwei" +
+                            "\nPixel verbindet.";
 
                         break;
                 }
@@ -404,19 +414,28 @@ public class Descriptors : MonoBehaviour
                 switch (lang)
                 {
                     case 1:
-                        resp += "";
+                        resp += "Na configuração atual" +
+                            "\n<b>(Cityblock)</b> ele representa" +
+                            "\na diferença absoluta entre" +
+                            "\nas posições de dois pixels.";
 
                         break;
 
                     //English
                     case 2:
-                        resp += "";
+                        resp += "The selected descriptor" +
+                            "\n<b>(Cityblock)</b> represents the " +
+                            "\nabsolute difference between" +
+                            "\nthe positions of two pixels.";
 
                         break;
 
                     //Deutsch
                     case 3:
-                        resp += "";
+                        resp += "Der ausgewählte Deskriptor" +
+                            "\n<b>(Cityblock)</b> stellt die" +
+                            "\nabsolute Differenz zwischen" +
+                            "\nden Positionen zweier Pixel.";
 
                         break;
                 }

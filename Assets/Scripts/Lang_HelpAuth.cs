@@ -41,16 +41,19 @@ public class Lang_HelpAuth : MonoBehaviour
         {
             case 1:
                 capture.text = "Capturar";
+                register.text = "Registro";
                 results.text = "Resultados";
                 break;
 
             case 2:
                 capture.text = "Capture";
+                register.text = "Register";
                 results.text = "Results";
                 break;
 
             case 3:
                 capture.text = "Aufnehmen";
+                register.text = "Register";
                 results.text = "Ergebnis";
                 break;
         }
@@ -169,7 +172,7 @@ public class Lang_HelpAuth : MonoBehaviour
 
             //Deutsch
             case 3:
-                howTo.text = "";
+                howTo.text = "Wie das Gesicht register";
                 steps.text = "1) Richten Sie Ihr Gesicht\n" +
                 	"\tinnerhalb der roter Rand; \n\n" +
                 	"2) Drücken Sie die blaue \n" +
@@ -208,8 +211,7 @@ public class Lang_HelpAuth : MonoBehaviour
                     "\nfor, mais semelhantes são;" +
                     "\n\n" + descr.DescriptorInfo(count);
 
-                capture.text = "Capturar";
-                results.text = "Resultados";
+                UpdateButtons();
 
                 break;
 
@@ -225,8 +227,7 @@ public class Lang_HelpAuth : MonoBehaviour
                     "\nbigger similarity;" +
                     "\n\n" + descr.DescriptorInfo(count);
 
-                capture.text = "Capture";
-                results.text = "Results";
+                UpdateButtons();
 
                 break;
 
@@ -242,8 +243,7 @@ public class Lang_HelpAuth : MonoBehaviour
                     "\neine größere Ähnlichkeit dar;" +
                     "\n\n" + descr.DescriptorInfo(count);
 
-                capture.text = "Aufnehmen";
-                results.text = "Ergebnis";
+                UpdateButtons();
 
                 break;
         }

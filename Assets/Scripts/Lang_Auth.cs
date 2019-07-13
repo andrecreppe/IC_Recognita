@@ -191,6 +191,12 @@ public class Lang_Auth : MonoBehaviour
 
         }
 
+        /*-------*/
+        //BETA FUNCTION!!!!!
+        if (desc.GetDescriptorInUse() < 3)
+            description += "\n<i>BETA RESULT</i>";
+        /*-------*/
+
         descTxt.text = description;
         descTxt.color = textColor;
 

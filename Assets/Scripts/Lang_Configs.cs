@@ -8,7 +8,7 @@ public class Lang_Configs : MonoBehaviour
     private int count, activeDescriptor;
     private string langKey, compKey;
 
-    public Text configs, lang, langName, descTitle, scale, euclidian, cossine;
+    public Text configs, lang, langName, descTitle, scale, euclidian, cossine, descValue;
     public Slider descSlider;
     public Image slider_fill, slider_knob;
     public Button buttonFlag;
@@ -30,11 +30,31 @@ public class Lang_Configs : MonoBehaviour
         compKey = "descriptor";
 
         count = PlayerPrefs.GetInt(langKey) - 1;
-        UpdateLanguage();
 
         activeDescriptor = PlayerPrefs.GetInt(compKey);
         descSlider.value = activeDescriptor;
+
+        UpdateLanguage();
         SliderColor();
+    }
+
+    //------------------ PRIVATE METHODS --------------------
+
+    private void UpdateTresholdValue() 
+    {
+        if(count == 1)
+            descValue.text = "Valor do treshold = ";
+        else if(count == 2)
+            descValue.text = "Treshold set value = ";
+        else if(count == 3)
+            descValue.text = "Treshold Zhal = ";
+
+        if(activeDescriptor == 1) 
+            descValue.text += desc.CITYBLOCK_treshold.ToString();
+        else if(activeDescriptor == 2)
+            descValue.text += desc.EUCLIDIAN_treshold.ToString();
+        else if(activeDescriptor == 3)
+            descValue.text += desc.COSSINE_treshold.ToString();
     }
 
     //------------------ PUBLIC METHODS --------------------
@@ -99,6 +119,8 @@ public class Lang_Configs : MonoBehaviour
 
         //Change the flag icon
         buttonFlag.image.sprite = flags[count - 1];
+
+        UpdateTresholdValue();
     }
 
     public void SliderColor()
@@ -110,13 +132,13 @@ public class Lang_Configs : MonoBehaviour
 
         slider_knob.color = new Color32(255, 255, 255, 255);
 
-        if (activeDescriptor == 1) // Medium
+        if (activeDescriptor == 1) // Dangerous
             slider_knob.color = new Color32(255, 0, 0, 255);
         else if (activeDescriptor == 2) // Medium
             slider_fill.color = new Color32(255, 255, 0, 255);
         else if (activeDescriptor == 3) //Safest
             slider_fill.color = new Color32(0, 255, 0, 255);
 
-        return;
+        UpdateTresholdValue();
     }
 }

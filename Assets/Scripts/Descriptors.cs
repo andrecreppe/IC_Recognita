@@ -5,9 +5,9 @@ public class Descriptors : MonoBehaviour
 {
     //---------------- VARIABLES --------------------
 
-    private readonly double COSSINE_treshold = 62.4; //already x1000
-    private readonly double EUCLIDIAN_treshold = 0.0;
-    private readonly double CITYBLOCK_treshold = 0.0;
+    public readonly double COSSINE_treshold = 110.43; //already x1000
+    public readonly double EUCLIDIAN_treshold = 8013.22;
+    public readonly double CITYBLOCK_treshold = 5948.58;
 
     private int selected_comparator;
     private string compKey;

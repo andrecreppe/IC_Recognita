@@ -33,15 +33,15 @@ public class Lang_Info : MonoBehaviour
             {
                 case 1: //Portugues
                     andre.text = "Contato André:\n" +
-                        "\tandre.creppe@uol.com.br";
+                        "\tandrecrepper@gmail.com";
                     break;
                 case 2: //English
                     andre.text = "André's contact:\n" +
-                        "\tandre.creppe@uol.com.br";
+                        "\tandrecrepper@gmail.com";
                     break;
                 case 3: //Deutsch
                     andre.text = "André Kontakt:\n" +
-                        "\tandre.creppe@uol.com.br";
+                        "\tandrecrepper@gmail.com";
                     break;
             }
         }
